@@ -82,7 +82,7 @@ class _PlayQuizState extends State<PlayQuiz> {
           child: SafeArea(
             child: Column(
               children: [
-                //TODO: Adjust timer anywhere.
+               
                 Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.all(20),
