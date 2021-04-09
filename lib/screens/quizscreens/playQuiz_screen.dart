@@ -3,13 +3,16 @@ import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+import 'package:flutter_countdown_timer/current_remaining_time.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutterapp/models/quizQuestions.dart';
 import 'package:flutterapp/models/quizzes.dart';
 import 'package:flutterapp/models/user.dart';
 import 'package:flutterapp/resources/firebase_methods.dart';
 import 'package:flutterapp/screens/home_screen.dart';
 import 'package:flutterapp/screens/quizscreens/scoring_screen.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:lottie/lottie.dart';
@@ -36,12 +39,17 @@ class _PlayQuizState extends State<PlayQuiz> {
   bool option3Selected = false;
   bool option4Selected = false;
 
-  PageController _pageController = PageController(initialPage: 0);
-  // var questionController = TextEditingController();
-  // var option1Controller = TextEditingController();
-  // var option2Controller = TextEditingController();
-  // var option3Controller = TextEditingController();
-  // var option4Controller = TextEditingController();
+  PageController pageController = PageController(initialPage: 0);
+
+  //Below is for timer.
+  CountdownTimerController timeController;
+  int endTime;
+  int duration;
+
+  double userMarks = 0.0;
+  int correctAnswers = 0;
+  int incorrectAnswers = 0;
+  int unattempted = 0;
 
   @override
   void initState() {
@@ -51,16 +59,31 @@ class _PlayQuizState extends State<PlayQuiz> {
     option2Selected = false;
     option3Selected = false;
     option4Selected = false;
+    duration = (widget.quiz.duration * 60);
+    endTime = DateTime.now().millisecondsSinceEpoch +
+        (1000 * (widget.quiz.duration * 60));
+    timeController = CountdownTimerController(
+      endTime: endTime,
+      onEnd: onQuizEnd,
+    );
   }
 
   @override
   void dispose() {
-    // questionController.dispose();
-    // option1Controller.dispose();
-    // option2Controller.dispose();
-    // option3Controller.dispose();
-    // option4Controller.dispose();
+    timeController.dispose();
     super.dispose();
+  }
+
+  void onQuizEnd() {
+    FirebaseMethods()
+        .updateUserTotalMarks(widget.user, userMarks)
+        .then((value) {
+      print(value);
+
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>
+              Scoringscreen(userMarks, widget.quiz.maxMarks)));
+    });
   }
 
   @override
@@ -82,14 +105,13 @@ class _PlayQuizState extends State<PlayQuiz> {
           child: SafeArea(
             child: Column(
               children: [
-               
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.all(20),
+                  padding:
+                      EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: size.height / 15),
                       Text(
                         '${quiz.quizName} Quiz',
                         style: GoogleFonts.raleway(
@@ -97,49 +119,89 @@ class _PlayQuizState extends State<PlayQuiz> {
                           fontSize: 21,
                         ),
                       ),
-                      // Priyansh is code ko dekh le ismein question controller laga dena baaki timer ka ui ho gaya
-                      //controller se hi page change hoga time khatam hone pr
-                      /* Container(
-                      width: double.infinity,
-                      height: 25,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xFF3F4768), width: 3),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: GetBuilder<questionController>(
-                        init: _pageController(),
-                        builder: (controller) {
-                          return Stack(
-                            children: [
-                              LayoutBuilder(
-                                builder: (context, constraints) => Container(
-                                  // from 0 to 1 it takes 60s
-                                  width: constraints.maxWidth * controller.animation.value,
-                                  decoration: BoxDecoration(
-                                    color: Colors.orangeAccent,
-                                    // gradient: kPrimaryGradient,
-                                    borderRadius: BorderRadius.circular(50),
+                      SizedBox(height: 10),
+                      Container(
+                        width: double.infinity,
+                        height: 25,
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xFF3F4768), width: 3),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: CountdownTimer(
+                          endTime: endTime,
+                          controller: timeController,
+                          onEnd: onQuizEnd,
+                          widgetBuilder: (context, remainingTime) {
+                            return Stack(
+                              children: [
+                                LayoutBuilder(
+                                  builder: (context, constraints) => Container(
+                                    width: size.width *
+                                        ((((remainingTime.min == null
+                                                        ? 0.0
+                                                        : remainingTime.min) *
+                                                    60) +
+                                                (remainingTime.sec == null
+                                                    ? 0.0
+                                                    : remainingTime.sec)) /
+                                            duration),
+                                    decoration: BoxDecoration(
+                                      color: ((((remainingTime.min == null
+                                                              ? 0.0
+                                                              : remainingTime
+                                                                  .min) *
+                                                          60) +
+                                                      (remainingTime.sec == null
+                                                          ? 0.0
+                                                          : remainingTime
+                                                              .sec)) /
+                                                  duration) >
+                                              0.6
+                                          ? Colors.green
+                                          : ((((remainingTime.min == null
+                                                                  ? 0.0
+                                                                  : remainingTime
+                                                                      .min) *
+                                                              60) +
+                                                          (remainingTime.sec ==
+                                                                  null
+                                                              ? 0.0
+                                                              : remainingTime
+                                                                  .sec)) /
+                                                      duration) >
+                                                  0.2
+                                              ? Colors.orange
+                                              : Colors.red,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Positioned.fill(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(" ${(60- controller.animation.value * 60).round()} sec"),
-                                      WebsafeSvg.asset("assets/icons/clock.svg"),
-                                    ],
+                                Positioned.fill(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          " ${(remainingTime.min == null ? '00' : remainingTime.min)}:${(remainingTime.sec == null ? '00' : remainingTime.sec)} min",
+                                          style: GoogleFonts.raleway(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        WebsafeSvg.asset(
+                                            "assets/icons/clock.svg"),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          );
-                        },
+                              ],
+                            );
+                          },
+                        ),
                       ),
-                    ), */
                       SizedBox(height: 5),
                       Text(
                         '${quiz.maxMarks} points',
@@ -206,13 +268,8 @@ class _PlayQuizState extends State<PlayQuiz> {
                         return PageView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data.documents.length,
-                          controller: _pageController,
+                          controller: pageController,
                           onPageChanged: (index) {
-                            // questionController = TextEditingController();
-                            // option1Controller = TextEditingController();
-                            // option2Controller = TextEditingController();
-                            // option3Controller = TextEditingController();
-                            // option4Controller = TextEditingController();
                             option1Selected = false;
                             option2Selected = false;
                             option3Selected = false;
@@ -329,53 +386,11 @@ class _PlayQuizState extends State<PlayQuiz> {
                                         optionString: 'D',
                                       ),
                                     ),
-                                    SizedBox(height: size.height / 8),
+                                    SizedBox(height: size.height / 25),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          width: size.width / 2.6,
-                                          height: size.height / 13,
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(colors: [
-                                              UniversalVariables
-                                                  .gradientColorStart,
-                                              UniversalVariables
-                                                  .gradientColorEnd
-                                            ]),
-                                            color: Colors.deepPurple,
-                                            borderRadius:
-                                                new BorderRadius.circular(50.0),
-                                          ),
-                                          child: TextButton(
-                                            onPressed: () {
-                                              if (_questionNo > 1) {
-                                                _pageController.animateToPage(
-                                                  index - 1,
-                                                  duration: Duration(
-                                                      milliseconds: 500),
-                                                  curve: Curves.easeOut,
-                                                );
-                                              } else {
-                                                //TODO: Show that user is leaving the quiz.
-                                                Navigator.pop(context);
-                                              }
-                                            },
-                                            child: Center(
-                                              child: Text(
-                                                'Back',
-                                                style: GoogleFonts.raleway(
-                                                  color: Colors.white,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                         Container(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 20),
@@ -419,49 +434,32 @@ class _PlayQuizState extends State<PlayQuiz> {
                                                 answerList[_questionNo - 1] =
                                                     options;
                                                 print(answerList);
+                                                double eachQuestionPoint =
+                                                    quiz.maxMarks /
+                                                        quiz.noOfQuestions;
+
+                                                if (answerList[
+                                                        _questionNo - 1] ==
+                                                    null) {
+                                                  unattempted++;
+                                                } else if (answerList[
+                                                        _questionNo - 1] ==
+                                                    question.correctOption) {
+                                                  userMarks = userMarks +
+                                                      eachQuestionPoint;
+                                                  correctAnswers++;
+                                                } else {
+                                                  incorrectAnswers++;
+                                                }
+
+                                                print(userMarks);
 
                                                 if (_questionNo ==
                                                     quiz.noOfQuestions) {
-                                                  double eachQuestionPoint =
-                                                      quiz.maxMarks /
-                                                          quiz.noOfQuestions;
-                                                  double userMarks = 0.0;
-                                                  int correctAnswers = 0;
-                                                  int incorrectAnswers = 0;
-                                                  int unattempted = 0;
-                                                  for (int i = 0;
-                                                      i < quiz.noOfQuestions;
-                                                      i++) {
-                                                    if (answerList[i] == null) {
-                                                      unattempted++;
-                                                    } else if (answerList[i] ==
-                                                        question
-                                                            .correctOption) {
-                                                      userMarks = userMarks +
-                                                          eachQuestionPoint;
-                                                      correctAnswers++;
-                                                    } else {
-                                                      incorrectAnswers++;
-                                                    }
-                                                  }
-                                                  print(userMarks);
-
-                                                  FirebaseMethods()
-                                                      .updateUserTotalMarks(
-                                                          user, userMarks)
-                                                      .then((value) {
-                                                    print(value);
-
-                                                    //TODO: Goes to scoring screen.
-                                                    Navigator.of(context).push(
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                Scoringscreen(
-                                                                    userMarks,
-                                                                    quiz.maxMarks)));
-                                                  });
+                                                  onQuizEnd();
+                                                  timeController.dispose();
                                                 } else {
-                                                  _pageController.animateToPage(
+                                                  pageController.animateToPage(
                                                     index + 1,
                                                     duration: Duration(
                                                         milliseconds: 500),

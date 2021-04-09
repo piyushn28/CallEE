@@ -33,42 +33,34 @@ class _ScoringscreenState extends State<Scoringscreen> {
               padding: EdgeInsets.all(12.0),
               child: Column(
                 children: [
-                  SizedBox(height: size.height / 40),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(
-                        width: size.width / 20,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: size.width / 1.4,
-                            right: 0,
-                            top: size.width / 35,
-                            bottom: 0),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Ink(
-                            decoration: BoxDecoration(
-                              color: Colors.deepPurple,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Center(
-                              child: FittedBox(
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.clear,
-                                    color: Colors.white,
-                                    size: size.width / 13,
-                                  ),
-                                  onPressed: () => Navigator.of(context)
-                                      .pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomeScreen()),
-                                          (route) => false),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()),
+                              (route) => false);
+                        },
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Center(
+                            child: FittedBox(
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.clear,
+                                  color: Colors.white,
+                                  size: size.width / 13,
                                 ),
+                                onPressed: () => Navigator.of(context)
+                                    .pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => HomeScreen()),
+                                        (route) => false),
                               ),
                             ),
                           ),
@@ -149,7 +141,7 @@ class _ScoringscreenState extends State<Scoringscreen> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: '/{widget.maxMarks.toString()}',
+                                    text: '/${widget.maxMarks.toString()}',
                                     style: GoogleFonts.raleway(
                                       color: Colors.white,
                                       fontSize: 30.0,
