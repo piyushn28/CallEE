@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "36839050743",
+    "project_id": "callie-626d8",
+    "storage_bucket": "callie-626d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36839050743:android:cbe5c0182d9dfda7c8b2f2",
+        "android_client_info": {
+          "package_name": "com.pixamentory.callie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36839050743-hjghs6qrtvf18sj2pg8colvd8fcuhf5r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixamentory.callie",
+            "certificate_hash": "88679316910b9ddcc0667579f9d0dd9021f5007b"
+          }
+        },
+        {
+          "client_id": "36839050743-kjjqmfcpc1r06od9g84f40nqaobin6ls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixamentory.callie",
+            "certificate_hash": "9227bfb6d2dbec77522d5cfb1456b8b180f62db4"
+          }
+        },
+        {
+          "client_id": "36839050743-tqh2d065ljfa6d74mb1iektptms3q770.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixamentory.callie",
+            "certificate_hash": "494ba81caa37060f2239cebb9febf49339cfc9e3"
+          }
+        },
+        {
+          "client_id": "36839050743-qlhqdvenddb2cp6kh8ab0aq80pr3o2ja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYJlrLu86CdBIAF35HPcmIHIL4mzjddr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36839050743-qlhqdvenddb2cp6kh8ab0aq80pr3o2ja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
