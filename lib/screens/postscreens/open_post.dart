@@ -22,12 +22,14 @@ class OpenPost extends StatefulWidget {
   final String postImageLink; //  tag name
   final String postTitle;
   final String postDescription;
+  final String postPostedByUid;
   const OpenPost(
       {Key key,
       this.postDocumentId,
       this.postImageLink,
       this.postTitle,
-      this.postDescription})
+      this.postDescription,
+      this.postPostedByUid})
       : super(key: key);
 
   @override
@@ -109,18 +111,17 @@ class _OpenPostState extends State<OpenPost> {
     // TODO: implement initState
     itemKey = GlobalKey();
     scrollController = ScrollController();
-    selectedIdx=mp[widget.postImageLink];
-    titleController.text=widget.postTitle;
-    descriptionController.text=widget.postDescription;
+    selectedIdx = mp[widget.postImageLink];
+    titleController.text = widget.postTitle;
+    descriptionController.text = widget.postDescription;
 
     super.initState();
   }
 
   _editOwnPost() {
-
     Size size = MediaQuery.of(context).size;
     return showModalBottomSheet(
-      // isDismissible: false,
+        // isDismissible: false,
         isScrollControlled: true,
         context: context,
         elevation: 0,
@@ -128,246 +129,241 @@ class _OpenPostState extends State<OpenPost> {
         builder: (context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-                final UserProvider userProvider =
+            final UserProvider userProvider =
                 Provider.of<UserProvider>(context);
-                final User user = userProvider.getUser;
+            final User user = userProvider.getUser;
 
-                return Container(
-                  height: size.height / 1.1,
-                  decoration: BoxDecoration(
-                    color: UniversalVariables.blackColor,
-                    borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(25.0),
-                      topRight: const Radius.circular(25.0),
-                    ),
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 15),
-                          child: Row(
-                            children: <Widget>[
-                              FlatButton(
-                                child: Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () => Navigator.maybePop(context),
-                              ),
-                              Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Edit Post",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.raleway(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ),
-                            ],
+            return Container(
+              height: size.height / 1.1,
+              decoration: BoxDecoration(
+                color: UniversalVariables.blackColor,
+                borderRadius: new BorderRadius.only(
+                  topLeft: const Radius.circular(25.0),
+                  topRight: const Radius.circular(25.0),
+                ),
+              ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      child: Row(
+                        children: <Widget>[
+                          FlatButton(
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                            onPressed: () => Navigator.maybePop(context),
                           ),
-                        ),
-                        Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: ListView(
-                              children: <Widget>[
-                                TextFormField(
-                                  maxLength: 20,
-                                  controller: titleController,
-                                  autofocus: true,
-                                  autocorrect: false,
-                                  keyboardType: TextInputType.multiline,
-                                  style: GoogleFonts.raleway(
-                                      letterSpacing: 1.2, color: Colors.white),
-                                  minLines: 1,
-                                  maxLines: 2,
-                                  cursorColor: Colors.deepPurple,
-                                  validator: (String value) {
-                                    if (value.isEmpty) {
-                                      return "Please enter title";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  decoration: InputDecoration(
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Edit Post",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.raleway(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: ListView(
+                          children: <Widget>[
+                            TextFormField(
+                              maxLength: 20,
+                              controller: titleController,
+                              autofocus: true,
+                              autocorrect: false,
+                              keyboardType: TextInputType.multiline,
+                              style: GoogleFonts.raleway(
+                                  letterSpacing: 1.2, color: Colors.white),
+                              minLines: 1,
+                              maxLines: 2,
+                              cursorColor: Colors.deepPurple,
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return "Please enter title";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              decoration: InputDecoration(
+                                  //contentPadding: EdgeInsets.symmetric(
+                                  //   vertical: 50.0, horizontal: 10.0),
+                                  counterStyle: TextStyle(
+                                      letterSpacing: 1.2,
+                                      color: Colors.white,
+                                      fontSize: 10),
+                                  filled: true,
+                                  fillColor: UniversalVariables.separatorColor,
+                                  hintText: "Title",
+                                  hintStyle: GoogleFonts.raleway(
+                                      color: Colors.white70,
+                                      fontWeight: FontWeight.w500),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.deepPurple))),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Container(
+                              height: 120,
+                              child: TextFormField(
+                                controller: descriptionController,
+                                expands: true,
+                                autofocus: true,
+                                autocorrect: false,
+                                keyboardType: TextInputType.multiline,
+                                style: GoogleFonts.raleway(
+                                    letterSpacing: 1.2, color: Colors.white),
+                                minLines: null,
+                                maxLines: null,
+                                cursorColor: Colors.deepPurple,
+                                validator: (String value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter Description";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
                                     //contentPadding: EdgeInsets.symmetric(
                                     //   vertical: 50.0, horizontal: 10.0),
-                                      counterStyle: TextStyle(
-                                          letterSpacing: 1.2,
-                                          color: Colors.white,
-                                          fontSize: 10),
-                                      filled: true,
-                                      fillColor: UniversalVariables.separatorColor,
-                                      hintText: "${widget.postTitle}",
-                                      hintStyle: GoogleFonts.raleway(
-                                          color: Colors.white70,
-                                          fontWeight: FontWeight.w500),
-                                      focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.deepPurple))),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                Container(
-                                  height: 120,
-                                  child: TextFormField(
-                                    controller: descriptionController,
-                                    expands: true,
-                                    autofocus: true,
-                                    autocorrect: false,
-                                    keyboardType: TextInputType.multiline,
-                                    style: GoogleFonts.raleway(
-                                        letterSpacing: 1.2, color: Colors.white),
-                                    minLines: null,
-                                    maxLines: null,
-                                    cursorColor: Colors.deepPurple,
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return "Please enter Description";
-                                      } else {
-                                        return null;
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      //contentPadding: EdgeInsets.symmetric(
-                                      //   vertical: 50.0, horizontal: 10.0),
-                                        filled: true,
-                                        fillColor:
+                                    filled: true,
+                                    fillColor:
                                         UniversalVariables.separatorColor,
-                                        hintText: descriptionController.text,
-                                        hintStyle: GoogleFonts.raleway(
-                                            color: Colors.white70,
-                                            fontWeight: FontWeight.w500),
-                                        focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.deepPurple))),
+                                    hintText: "Description",
+                                    hintStyle: GoogleFonts.raleway(
+                                        color: Colors.white70,
+                                        fontWeight: FontWeight.w500),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.deepPurple))),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  height: size.height / 5,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: UniversalVariables.highlightColor,
+                                    borderRadius:
+                                        new BorderRadius.circular(20.0),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Tags",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.raleway(
+                                          fontSize: 16,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 30,
+                                  width: 10,
                                 ),
-                                Row(
-                                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Container(
-                                      height: size.height / 5,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                        color: UniversalVariables.highlightColor,
-                                        borderRadius:
-                                        new BorderRadius.circular(20.0),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "Tags",
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.raleway(
-                                              fontSize: 16,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: size.height / 5,
-                                        width: size.width / 1.3,
-                                        decoration: BoxDecoration(
-                                          color: UniversalVariables.separatorColor,
-                                          borderRadius: BorderRadius.circular(20.0),
-                                        ),
-                                        child: SingleChildScrollView(
-                                          scrollDirection: Axis.vertical,
-                                          child: Wrap(
-                                            //spacing: 3.0,
-                                            //runSpacing: 2.0,
-                                            children: [
-                                              _createChips(context,setState)
-                                            ],
-                                          ),
-                                        ),
-                                        //width: size.width,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    // if(titleController.text.isNotEmpty && descriptionController.text.isNotEmpty){
-                                    if (_formKey.currentState.validate()) {
-                                      try {
-                                        Firestore.instance
-                                            .collection("posts")
-                                            .document(widget.postDocumentId)
-                                            .setData({
-                                          "title": titleController.text,
-                                          "description": descriptionController.text,
-                                          "time": DateTime.now(),
-                                          'postDocId': widget.postDocumentId,
-                                          "tags": options[selectedIdx],
-                                          "userAvatar": user.profilePhoto,
-                                          "userName": user.name,
-                                          "likedByIds": [],
-                                          "postedByUserUid": user.uid,
-                                        }, merge: true);
-                                        titleController.clear();
-                                        descriptionController.clear();
-                                        selectedIdx = 0;
-                                        Navigator.pop(context);
-                                      } catch (e) {
-                                        print(e.message);
-                                      }
-                                    }
-                                  },
+                                Expanded(
                                   child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0),
-                                        ),
-                                        color: Colors.deepPurpleAccent,
+                                    height: size.height / 5,
+                                    width: size.width / 1.3,
+                                    decoration: BoxDecoration(
+                                      color: UniversalVariables.separatorColor,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.vertical,
+                                      child: Wrap(
+                                        //spacing: 3.0,
+                                        //runSpacing: 2.0,
+                                        children: [
+                                          _createChips(context, setState)
+                                        ],
                                       ),
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                        ),
-                                      )),
+                                    ),
+                                    //width: size.width,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // if(titleController.text.isNotEmpty && descriptionController.text.isNotEmpty){
+                                if (_formKey.currentState.validate()) {
+                                  try {
+                                    Firestore.instance
+                                        .collection("posts")
+                                        .document(widget.postDocumentId)
+                                        .setData({
+                                      "title": titleController.text,
+                                      "description": descriptionController.text,
+                                      "time": DateTime.now(),
+                                      'postDocId': widget.postDocumentId,
+                                      "tags": options[selectedIdx],
+                                      "userAvatar": user.profilePhoto,
+                                      "userName": user.name,
+                                      "postedByUserUid": user.uid,
+                                    }, merge: true);
+                                    titleController.clear();
+                                    descriptionController.clear();
+                                    selectedIdx = 0;
+                                    Navigator.pop(context);
+                                  } catch (e) {
+                                    print(e.message);
+                                  }
+                                }
+                              },
+                              child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10.0),
+                                    ),
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  )),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              });
+                  ],
+                ),
+              ),
+            );
+          });
         });
   }
 
-
-
   _editPost2() {
-
-
     Size size = MediaQuery.of(context).size;
     return showModalBottomSheet(
-      // isDismissible: false,
+        // isDismissible: false,
         isScrollControlled: true,
         context: context,
         elevation: 0,
@@ -437,29 +433,40 @@ class _OpenPostState extends State<OpenPost> {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                          UniversalVariables.gradientColorStart,
-                          UniversalVariables.gradientColorEnd
-                        ]),
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Text(
-                            'Delete Post',
-                            style: GoogleFonts.raleway(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
+                    GestureDetector(
+                      onTap: () {
+                        Firestore.instance
+                            .collection("posts")
+                            .document(widget.postDocumentId)
+                            .delete();
+                          Navigator.pop(context);
+                        Navigator.pop(context);
+
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: [
+                            UniversalVariables.gradientColorStart,
+                            UniversalVariables.gradientColorEnd
+                          ]),
+                          color: Colors.deepPurple,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Text(
+                              'Delete Post',
+                              style: GoogleFonts.raleway(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
+                        height: size.height / 16,
+                        width: size.width / 3,
                       ),
-                      height: size.height / 16,
-                      width: size.width / 3,
                     ),
                   ],
                 )
@@ -468,7 +475,6 @@ class _OpenPostState extends State<OpenPost> {
           );
         });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -519,15 +525,17 @@ class _OpenPostState extends State<OpenPost> {
               slivers: [
                 SliverAppBar(
                   actions: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_drop_down_circle_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        _editPost2();
-                      },
-                    ),
+                    widget.postPostedByUid == user.uid
+                        ? IconButton(
+                            icon: Icon(
+                              Icons.arrow_drop_down_circle_outlined,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              _editPost2();
+                            },
+                          )
+                        : Container(),
                     SizedBox(
                       width: size.width / 40,
                     ),
@@ -593,11 +601,14 @@ class _OpenPostState extends State<OpenPost> {
                         return Container();
                       }
 
-                      var v;
+                      var v=[];
+
                       for (int i = 0; i < snapshot.data.documents.length; i++) {
                         v = snapshot.data.documents[i].data['likedByIds'];
                       }
-
+                      if(v.toList()==null){
+                        v=[];
+                      }
                       likedByIds = v.toList();
 
                       return LikeButton(
