@@ -446,6 +446,12 @@ class _PostScreenState extends State<PostScreen> {
                                                                         index]
                                                                             .data[
                                                                         'description'],
+                                                                        postPostedByUid: snapshot
+                                                                            .data
+                                                                            .documents[
+                                                                        index]
+                                                                            .data[
+                                                                        'postedByUserUid'],
                                                                       );
                                                         }));
                                                       },
@@ -733,31 +739,37 @@ class _PostScreenState extends State<PostScreen> {
                                                             MaterialPageRoute(
                                                                 builder:
                                                                     (context) {
-                                                          return OpenPost(
-                                                            postDocumentId: snapshot
-                                                                    .data
-                                                                    .documents[
+                                                                      return OpenPost(
+                                                                        postDocumentId: snapshot
+                                                                            .data
+                                                                            .documents[
                                                                         index]
-                                                                    .data[
-                                                                'postDocId'],
-                                                            postImageLink:
-                                                                snapshot
-                                                                    .data
-                                                                    .documents[
+                                                                            .data[
+                                                                        'postDocId'],
+                                                                        postImageLink:
+                                                                        snapshot
+                                                                            .data
+                                                                            .documents[
                                                                         index]
-                                                                    .data['tags'],
-                                                            postTitle: snapshot
-                                                                .data
-                                                                .documents[
-                                                                    index]
-                                                                .data['title'],
-                                                            postDescription: snapshot
-                                                                    .data
-                                                                    .documents[
+                                                                            .data['tags'],
+                                                                        postTitle: snapshot
+                                                                            .data
+                                                                            .documents[
                                                                         index]
-                                                                    .data[
-                                                                'description'],
-                                                          );
+                                                                            .data['title'],
+                                                                        postDescription: snapshot
+                                                                            .data
+                                                                            .documents[
+                                                                        index]
+                                                                            .data[
+                                                                        'description'],
+                                                                        postPostedByUid: snapshot
+                                                                            .data
+                                                                            .documents[
+                                                                        index]
+                                                                            .data[
+                                                                        'postedByUserUid'],
+                                                                      );
                                                         }));
                                                       },
                                                       child: Container(
