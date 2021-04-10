@@ -38,10 +38,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   int activeIndex;
 
-  /// Handler for when you want to programmatically change
-  /// the active index. Calling `setState()` here causes
-  /// Flutter to re-render the tree, which `AnimatedBottomNavigationBar`
-  /// responds to by running its normal animation.
   void _onTap(int index) {
     setState((){
       activeIndex = index;
@@ -66,12 +62,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     Icons.post_add,
     Icons.person_rounded,
   ];
-
-  /// Handler for when you want to programmatically change
-  /// the active index. Calling `setState()` here causes
-  /// Flutter to re-render the tree, which `AnimatedBottomNavigationBar`
-  /// responds to by running its normal animation.
-
 
   @override
   void initState() {
@@ -169,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               StudentDashboard(
                 pageController: pageController,
               ),
-              TeacherDashboard(pageController: pageController),
+              //TeacherDashboard(pageController: pageController),
               ChatListScreen(),
               LogScreen(),
               PostScreen(
@@ -181,116 +171,103 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             onPageChanged: onPageChanged,
             //physics: NeverScrollableScrollPhysics(),
           ),
-          /* bottomNavigationBar: Container(
-       //   bottomNavigationBar: AnimatedBottomNavigationBar(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: CupertinoTabBar(
-                backgroundColor: UniversalVariables.blackColor,
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home_outlined,
-                        color: (_page == 0)
-                            ? UniversalVariables.lightPurpleColor
-                            : UniversalVariables.greyColor),
-                    title: Text(
-                      "StuHome",
-                      style: TextStyle(
-                          fontSize: _labelFontSize,
-                          color: (_page == 0)
-                              ? UniversalVariables.lightPurpleColor
-                              : Colors.grey),
-                    ),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home_outlined,
-                        color: (_page == 1)
-                            ? UniversalVariables.lightPurpleColor
-                            : UniversalVariables.greyColor),
-                    title: Text(
-                      "TeaHome",
-                      style: TextStyle(
-                          fontSize: _labelFontSize,
-                          color: (_page == 1)
-                              ? UniversalVariables.lightPurpleColor
-                              : Colors.grey),
-                    ),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.chat,
-                        color: (_page == 2)
-                            ? UniversalVariables.lightPurpleColor
-                            : UniversalVariables.greyColor),
-                    title: Text(
-                      "Chats",
-                      style: TextStyle(
-                          fontSize: _labelFontSize,
-                          color: (_page == 2)
-                              ? UniversalVariables.lightPurpleColor
-                              : Colors.grey),
-                    ),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.call,
-                        color: (_page == 3)
-                            ? UniversalVariables.lightPurpleColor
-                            : UniversalVariables.greyColor),
-                    title: Text(
-                      "Calls",
-                      style: TextStyle(
-                          fontSize: _labelFontSize,
-                          color: (_page == 3)
-                              ? UniversalVariables.lightPurpleColor
-                              : Colors.grey),
-                    ),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.post_add,
-                        color: (_page == 4)
-                            ? UniversalVariables.lightPurpleColor
-                            : UniversalVariables.greyColor),
-                    title: Text(
-                      "Posts",
-                      style: TextStyle(
-                          fontSize: _labelFontSize,
-                          color: (_page == 4)
-                              ? UniversalVariables.lightPurpleColor
-                              : Colors.grey),
-                    ),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.person_rounded,
-                        color: (_page == 5)
-                            ? UniversalVariables.lightPurpleColor
-                            : UniversalVariables.greyColor),
-                    title: Text(
-                      "Profile",
-                      style: TextStyle(
-                          fontSize: _labelFontSize,
-                          color: (_page == 5)
-                              ? UniversalVariables.lightPurpleColor
-                              : Colors.grey),
-                    ),
-                  ),
-                ],
-                onTap: navigationTapped,
-                currentIndex: _page,
-              ),
-            ),
-          ), */
-          floatingActionButton: FloatingActionButton(
-            focusColor: Colors.white,
-            backgroundColor: UniversalVariables.separatorColor,
-            child: const Icon(Icons.add, size: 30.0), splashColor: Colors.white,
-            foregroundColor: Colors.white,
-            onPressed: () {},
-            //params
-          ),
+          /* bottomNavigationBar: CupertinoTabBar(
+             backgroundColor: UniversalVariables.blackColor,
+             items: <BottomNavigationBarItem>[
+               BottomNavigationBarItem(
+                 icon: Icon(Icons.home_outlined,
+                     color: (_page == 0)
+                         ? UniversalVariables.lightPurpleColor
+                         : UniversalVariables.greyColor),
+                 title: Text(
+                   "StuHome",
+                   style: TextStyle(
+                       fontSize: _labelFontSize,
+                       color: (_page == 0)
+                           ? UniversalVariables.lightPurpleColor
+                           : Colors.grey),
+                 ),
+               ),
+               BottomNavigationBarItem(
+                 icon: Icon(Icons.home_outlined,
+                     color: (_page == 1)
+                         ? UniversalVariables.lightPurpleColor
+                         : UniversalVariables.greyColor),
+                 title: Text(
+                   "TeaHome",
+                   style: TextStyle(
+                       fontSize: _labelFontSize,
+                       color: (_page == 1)
+                           ? UniversalVariables.lightPurpleColor
+                           : Colors.grey),
+                 ),
+               ),
+               BottomNavigationBarItem(
+                 icon: Icon(Icons.chat,
+                     color: (_page == 2)
+                         ? UniversalVariables.lightPurpleColor
+                         : UniversalVariables.greyColor),
+                 title: Text(
+                   "Chats",
+                   style: TextStyle(
+                       fontSize: _labelFontSize,
+                       color: (_page == 2)
+                           ? UniversalVariables.lightPurpleColor
+                           : Colors.grey),
+                 ),
+               ),
+               BottomNavigationBarItem(
+                 icon: Icon(Icons.call,
+                     color: (_page == 3)
+                         ? UniversalVariables.lightPurpleColor
+                         : UniversalVariables.greyColor),
+                 title: Text(
+                   "Calls",
+                   style: TextStyle(
+                       fontSize: _labelFontSize,
+                       color: (_page == 3)
+                           ? UniversalVariables.lightPurpleColor
+                           : Colors.grey),
+                 ),
+               ),
+               BottomNavigationBarItem(
+                 icon: Icon(Icons.post_add,
+                     color: (_page == 4)
+                         ? UniversalVariables.lightPurpleColor
+                         : UniversalVariables.greyColor),
+                 title: Text(
+                   "Posts",
+                   style: TextStyle(
+                       fontSize: _labelFontSize,
+                       color: (_page == 4)
+                           ? UniversalVariables.lightPurpleColor
+                           : Colors.grey),
+                 ),
+               ),
+               BottomNavigationBarItem(
+                 icon: Icon(Icons.person_rounded,
+                     color: (_page == 5)
+                         ? UniversalVariables.lightPurpleColor
+                         : UniversalVariables.greyColor),
+                 title: Text(
+                   "Profile",
+                   style: TextStyle(
+                       fontSize: _labelFontSize,
+                       color: (_page == 5)
+                           ? UniversalVariables.lightPurpleColor
+                           : Colors.grey),
+                 ),
+               ),
+             ],
+             onTap: navigationTapped,
+             currentIndex: _page,
+           ),*/
           bottomNavigationBar: AnimatedBottomNavigationBar(
+
             icons: iconList,
             inactiveColor: Colors.white,
             iconSize: 30,
-            activeIndex: _bottomNavIndex,
+            activeIndex: _page,
             elevation: 5,
             leftCornerRadius: 32,
             rightCornerRadius: 32,
@@ -298,7 +275,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             notchSmoothness: NotchSmoothness.smoothEdge,
             backgroundColor: UniversalVariables.separatorColor,
             activeColor: Colors.deepPurpleAccent,
-            onTap: (index) => setState(() => _bottomNavIndex = index),
+            onTap: (index) {
+              setState(() {
+                _page = index;
+                pageController.jumpToPage(_page);
+              });
+
+              },
             // animationCurve: Curves.easeInBack,
             // animationDuration: const Duration(milliseconds: 300),
           ),

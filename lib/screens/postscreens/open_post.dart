@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/models/user.dart';
 import 'package:flutterapp/provider/user_provider.dart';
 import 'package:flutterapp/screens/chatscreens/widgets/cached_image.dart';
-import 'package:flutterapp/screens/postscreens/post_menu.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:flutterapp/utils/utilities.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -55,25 +54,24 @@ class _OpenPostState extends State<OpenPost> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   List<String> options = [
-    "Time",
-    "Motivation",
-    "Work",
-    "Music",
-    "Goals",
-    "Books",
-    "Life",
-    "Learning"
+    "Academics",
+    "Confessions",
+    "Android",
+    "Machine Learning",
+    "React",
+    "Databases",
+    "Competitive Programming",
+    "Others"
   ];
-
   Map mp = {
-    "Time": 0,
-    "Motivation": 1,
-    "Work": 2,
-    "Music": 3,
-    "Goals": 4,
-    "Books": 5,
-    "Life": 6,
-    "Learning": 7
+    "Academics": 0,
+    "Confessions": 1,
+    "Android": 2,
+    "Machine Learning": 3,
+    "React": 4,
+    "Databases": 5,
+    "Competitive Programming": 6,
+    "Others": 7
   };
 
   int selectedIdx = 0;

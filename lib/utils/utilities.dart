@@ -14,22 +14,22 @@ class Utils {
 
   // ignore: missing_return
   static String getPostPicture(String tag){
-    if(tag=='Time'){
-      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/categories_images%2Ftime.jpg?alt=media&token=e79eab44-47f3-4d18-a575-d9839e1cd94d";
-    }else if(tag=='Motivation'){
-      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/categories_images%2Fmotivation.jpg?alt=media&token=1e2480df-3ff1-429d-9954-e19a2ff1820e";
-    }else if(tag=='Work'){
-      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/categories_images%2Fwork.jpg?alt=media&token=45760477-160a-43b9-aa65-d33541edb1fe";
-    }else if(tag=='Music'){
-      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/categories_images%2Fmusic.jpg?alt=media&token=38225d7e-b5f1-4ff1-85e1-573495f107c0";
-    }else if(tag=='Goals'){
-      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/categories_images%2Fgoals.jpg?alt=media&token=bcede161-d98d-4790-8d07-ec2596946992";
-    }else if(tag=='Books'){
-      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/categories_images%2Fbooks.jpg?alt=media&token=654ab387-19b8-4b5c-a8ff-dffb4e8f80e1";
-    }else if(tag=='Life'){
-      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/categories_images%2Flife.jpg?alt=media&token=6f65c1d1-639a-4c93-8859-9aba4e683d1b";
-    }else if(tag=='Learning'){
-      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/categories_images%2Flearning.jpg?alt=media&token=5364e39c-4745-4e6e-ab94-89620d740ed5";
+    if(tag=='Academics'){
+      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/ImgAssets%2FAcademics.jpg?alt=media&token=14736d6a-ed84-46b4-855b-850f561b7345";
+    }else if(tag=='Confessions'){
+      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/ImgAssets%2FConfessions.jpg?alt=media&token=39078481-bdc0-44ee-ab29-692b5339553f";
+    }else if(tag=='Android'){
+      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/ImgAssets%2FAndroid.jpg?alt=media&token=183cfce6-d2a8-4cdb-828f-75dac3b63975";
+    }else if(tag=='Machine Learning'){
+      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/ImgAssets%2FMachine%20Learning.jpg?alt=media&token=9def3d81-60ed-4ac1-94f3-c3c2a0c34869";
+    }else if(tag=='React'){
+      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/ImgAssets%2FReact.jpeg?alt=media&token=d5994d5e-5054-46fa-8537-eae2640c55f5";
+    }else if(tag=='Databases'){
+      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/ImgAssets%2FDatabases.jpg?alt=media&token=515debc5-0565-45cd-a4d9-0853ca0d7a52";
+    }else if(tag=='Competitive Programming'){
+      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/ImgAssets%2FCompetitive%20Programming.png?alt=media&token=309f6023-6b0b-43eb-927b-b32cbaaf98c6";
+    }else if(tag=='Others'){
+      return "https://firebasestorage.googleapis.com/v0/b/callie-626d8.appspot.com/o/ImgAssets%2FOthers.jpg?alt=media&token=dbea9246-f541-44a0-b8e7-55285bc59501";
     }
   }
 

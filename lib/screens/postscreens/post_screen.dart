@@ -53,15 +53,16 @@ class _PostScreenState extends State<PostScreen> {
 
   List<String> options = [
     "All",
-    "Time",
-    "Motivation",
-    "Work",
-    "Music",
-    "Goals",
-    "Books",
-    "Life",
-    "Learning"
+    "Academics",
+    "Confessions",
+    "Android",
+    "Machine Learning",
+    "React",
+    "Databases",
+    "Competitive Programming",
+    "Others"
   ];
+
 
   int _tag = 0;
   _buildChoiceList() {
