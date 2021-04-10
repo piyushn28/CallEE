@@ -16,7 +16,9 @@
 ## Technology Stack:
   1) Flutter
   2) Firebase
-  3) Agora
+  3) GetX
+  4) Agora SDK
+  5) Lottie
   
 
 ## Contributors:
