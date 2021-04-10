@@ -20,9 +20,7 @@ class TopThree extends StatelessWidget {
         Container(
             width: large ? 40.0 : 30.0,
             height: large ? 40.0 : 30.0,
-            child: Stack(
-              children: <Widget>[],
-            )),
+            ),
         index == 1
             ? Text("🥇", style: r)
             : index == 2

@@ -46,7 +46,7 @@ class AnswerUI extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "  $index.",
+                      "$index.",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -74,7 +74,7 @@ class AnswerUI extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: size.height / 120),
+              //SizedBox(height: size.height / 120),
               Expanded(
                 flex: 2,
                 child: Container(
@@ -98,7 +98,7 @@ class AnswerUI extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 65,
+                height: size.height/12,
                 width: size.width / 1.3,
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -116,6 +116,7 @@ class AnswerUI extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: <Widget>[
+
                       Container(
                         height: 40,
                         width: 40,
@@ -138,7 +139,7 @@ class AnswerUI extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: size.width / 100,
+                        width: size.width / 50,
                       ),
                       Text(
                         '${question.option1}',
@@ -153,7 +154,7 @@ class AnswerUI extends StatelessWidget {
               ),
               SizedBox(height: size.height / 40),
               Container(
-                height: 65,
+                height: size.height/12,
                 width: size.width / 1.3,
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -193,7 +194,7 @@ class AnswerUI extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: size.width / 100,
+                        width: size.width / 50,
                       ),
                       Text(
                         '${question.option2}',
@@ -208,7 +209,7 @@ class AnswerUI extends StatelessWidget {
               ),
               SizedBox(height: size.height / 40),
               Container(
-                height: 65,
+                height: size.height/12,
                 width: size.width / 1.3,
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -248,7 +249,7 @@ class AnswerUI extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: size.width / 100,
+                        width: size.width / 50,
                       ),
                       Text(
                         '${question.option3}',
@@ -263,7 +264,7 @@ class AnswerUI extends StatelessWidget {
               ),
               SizedBox(height: size.height / 40),
               Container(
-                height: 65,
+                height: size.height/12,
                 width: size.width / 1.3,
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -303,7 +304,7 @@ class AnswerUI extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: size.width / 100,
+                        width: size.width / 50,
                       ),
                       Text(
                         '${question.option4}',

@@ -88,35 +88,14 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
               height: size.height / 5,
               child: Stack(
                 children: <Widget>[
-                  Container(
-                    height: size.height / 2.8,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: UniversalVariables.blackColor,
-                      ),
-                      color: UniversalVariables.blackColor,
-                    ),
-                  ),
                   Align(
                     alignment: Alignment(-0.9, -0.5),
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 80,
-                          width: 80,
-                          color: Colors.redAccent,
-                          child: CachedNetworkImage(
-                            imageUrl: leaderboardList[1].avatarUrl,
-                          ),
-                        ),
-                        TopThree(
+                    child: TopThree(
                           index: 2,
                           userDetails: leaderboardList.length > 1
                               ? leaderboardList[1]
                               : null,
                         ),
-                      ],
-                    ),
                   ),
                   Align(
                       alignment: Alignment(0.0, -4.5),

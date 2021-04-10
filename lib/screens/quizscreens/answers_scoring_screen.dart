@@ -8,6 +8,8 @@ import 'package:flutterapp/resources/firebase_methods.dart';
 import 'package:flutterapp/screens/quizscreens/answer_question_ui.dart';
 import 'package:flutterapp/screens/quizscreens/createQuestions_screen.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
+import 'package:flutterapp/widgets/appbar.dart';
+import 'package:flutterapp/widgets/skype_appbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:random_string/random_string.dart';
@@ -60,7 +62,30 @@ class _AnswerScreenState extends State<AnswerScreen> {
                     padding: EdgeInsets.all(12.0),
                     child: Column(
                       children: [
-                        SizedBox(height: 10),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.deepPurpleAccent,
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            child: Center(
+                              child: FittedBox(
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.arrow_back_ios_rounded,
+                                    color: Colors.white,
+                                    size: size.width/13,
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: size.height/50),
                         Container(
                           child: Row(
                             children: [
@@ -80,7 +105,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                       "${widget.quiz.quizName}",
                                       style: GoogleFonts.raleway(
                                         color: Colors.white,
-                                        fontSize: 18,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -88,7 +113,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                       "${widget.quiz.branch}-${widget.quiz.batch} | ${widget.quiz.extraMessage}",
                                       style: GoogleFonts.raleway(
                                         color: Colors.amber,
-                                        fontSize: 15,
+                                        fontSize: 12,
                                       ),
                                     ),
                                   ],
@@ -97,10 +122,13 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             ],
                           ),
                         ),
-                        const Divider(
+                         SizedBox(
+                           height: size.height/100,
+                         ),
+                         Divider(
                           height: 10,
                           thickness: 3,
-                          color: Colors.grey,
+                          color: UniversalVariables.separatorColor,
                         ),
                         SizedBox(height: 10),
                         FittedBox(
@@ -127,12 +155,15 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: size.width/80,
+                        ),
                         FittedBox(
                           child: Container(
                             width: size.width / 1.1,
                             child: RichText(
                               text: TextSpan(
-                                  text: 'InCorrect:',
+                                  text: 'Incorrect:',
                                   style: GoogleFonts.raleway(
                                     color: Colors.red,
                                     fontSize: 18.0,
@@ -151,6 +182,9 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                   ]),
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: size.width/80,
                         ),
                         FittedBox(
                           child: Container(
@@ -176,7 +210,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: size.height/20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -185,22 +219,22 @@ class _AnswerScreenState extends State<AnswerScreen> {
                               style: GoogleFonts.raleway(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 30.0,
+                                fontSize: 28.0,
                               ),
                             ),
                             Text(
                               "${userAnswers.scoredMarks.round()}/${userAnswers.maxMarks}",
                               style: GoogleFonts.raleway(
                                 color: Colors.amber,
-                                fontSize: 30,
+                                fontSize: 28,
                               ),
                             ),
                           ],
                         ),
-                        const Divider(
+                         Divider(
                           height: 10,
                           thickness: 1,
-                          color: Colors.grey,
+                          color: UniversalVariables.separatorColor,
                         ),
                         StreamBuilder(
                             stream: Firestore.instance
@@ -275,12 +309,12 @@ class _AnswerScreenState extends State<AnswerScreen> {
                             Navigator.pop(context);
                           },
                           child: new Container(
-                            width: size.width / 1.4,
-                            height: size.height / 13,
+                            width: size.width / 2,
+                            height: size.height / 15,
                             decoration: new BoxDecoration(
                               color: Colors.transparent,
                               border:
-                                  Border.all(color: Colors.white, width: 2.0),
+                                  Border.all(color: UniversalVariables.separatorColor, width: 2.0),
                               borderRadius: new BorderRadius.circular(50.0),
                             ),
                             child: new Center(
@@ -288,13 +322,14 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                 'Home',
                                 style: new TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color: Colors.white,
                                 ),
                               ),
                             ),
                           ),
                         ),
+                        SizedBox(height: size.height / 50),
                       ],
                     ),
                   ),

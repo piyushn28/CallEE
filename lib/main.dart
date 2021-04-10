@@ -104,12 +104,12 @@ class _MyAppState extends State<MyApp> {
           '/search_screen': (context) => SearchScreen(),
           '/home_screen': (context) => HomeScreen(),
         },
-        home: LoginScreenTemp(),
-       /*  home: currPage == "LoginPage"
+        //home: LoginScreenTemp(),
+         home: currPage == "LoginPage"
             ? LoginScreenTemp()
             : currPage == "HomeScreen"
                 ? HomeScreen()
-                : StudentTeacherPage(), */
+                : StudentTeacherPage(),
       ),
     );
   }
