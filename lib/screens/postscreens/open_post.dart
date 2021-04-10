@@ -39,7 +39,13 @@ class _OpenPostState extends State<OpenPost> {
   final _controller = ScrollController();
   GlobalKey itemKey;
   TextEditingController commentController = new TextEditingController();
-  var year_name = {1: 'Fresher', 2: 'Sophomore', 3: 'Junior', 4: 'Senior'};
+  var year_name = {
+    1: 'Fresher',
+    2: 'Sophomore',
+    3: 'Junior',
+    4: 'Senior',
+    5: 'Alumini',
+  };
   ScrollController scrollController;
   final _bodyController = new ScrollController();
   List reportedIds = [];
@@ -412,7 +418,7 @@ class _OpenPostState extends State<OpenPost> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Padding(
-                            padding:  EdgeInsets.all(size.width/30),
+                            padding: EdgeInsets.all(size.width / 30),
                             child: Center(
                               child: Text(
                                 'Edit Post',
@@ -434,9 +440,8 @@ class _OpenPostState extends State<OpenPost> {
                             .collection("posts")
                             .document(widget.postDocumentId)
                             .delete();
-                          Navigator.pop(context);
                         Navigator.pop(context);
-
+                        Navigator.pop(context);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -448,7 +453,7 @@ class _OpenPostState extends State<OpenPost> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(size.width/30),
+                          padding: EdgeInsets.all(size.width / 30),
                           child: Center(
                             child: Text(
                               'Delete Post',
@@ -596,13 +601,13 @@ class _OpenPostState extends State<OpenPost> {
                         return Container();
                       }
 
-                      var v=[];
+                      var v = [];
 
                       for (int i = 0; i < snapshot.data.documents.length; i++) {
                         v = snapshot.data.documents[i].data['likedByIds'];
                       }
-                      if(v.toList()==null){
-                        v=[];
+                      if (v.toList() == null) {
+                        v = [];
                       }
                       likedByIds = v.toList();
 

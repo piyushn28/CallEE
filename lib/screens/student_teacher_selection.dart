@@ -20,7 +20,6 @@ class StudentTeacherPage extends StatefulWidget {
 }
 
 class _StudentTeacherPageState extends State<StudentTeacherPage> {
-
   //#Todo Controllers was used after being disposed. 2 errors here
 
   //GetX for user->Student/Teacher
@@ -149,6 +148,10 @@ class _StudentTeacherPageState extends State<StudentTeacherPage> {
                                 DropdownMenuItem(
                                   child: Text('Senior'),
                                   value: 4,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('Alumini'),
+                                  value: 5,
                                 ),
                               ],
                               style: GoogleFonts.raleway(

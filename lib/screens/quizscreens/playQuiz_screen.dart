@@ -103,8 +103,8 @@ class _PlayQuizState extends State<PlayQuiz> {
       });
 
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>
-              Scoringscreen(userMarks, widget.quiz.maxMarks)));
+          builder: (context) => Scoringscreen(
+              userMarks, widget.quiz.maxMarks, widget.user, widget.quiz)));
     });
   }
 

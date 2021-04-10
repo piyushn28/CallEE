@@ -41,7 +41,13 @@ class _MainProfileState extends State<MainProfile>
     _scrollViewController.dispose();
   }
 
-  var year_name = {1: 'Fresher', 2: 'Sophomore', 3: 'Junior', 4: 'Senior'};
+  var year_name = {
+    1: 'Fresher',
+    2: 'Sophomore',
+    3: 'Junior',
+    4: 'Senior',
+    5: 'Alumini',
+  };
   final _controller = ScrollController();
 
   TextEditingController titleController = new TextEditingController();
@@ -99,7 +105,7 @@ class _MainProfileState extends State<MainProfile>
   _editPost(int tagNum, String userId, String postDocId) {
     Size size = MediaQuery.of(context).size;
     return showModalBottomSheet(
-      // isDismissible: false,
+        // isDismissible: false,
         isScrollControlled: true,
         context: context,
         elevation: 0,
@@ -107,329 +113,337 @@ class _MainProfileState extends State<MainProfile>
         builder: (context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-                final UserProvider userProvider =
+            final UserProvider userProvider =
                 Provider.of<UserProvider>(context);
-                final User user = userProvider.getUser;
+            final User user = userProvider.getUser;
 
-                return Container(
-                  height: size.height / 1.1,
-                  decoration: BoxDecoration(
-                    color: UniversalVariables.blackColor,
-                    borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(25.0),
-                      topRight: const Radius.circular(25.0),
-                    ),
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 15),
-                          child: Row(
-                            children: <Widget>[
-                              WillPopScope(
-                                onWillPop: () => (titleController.text.length != 0 ||
+            return Container(
+              height: size.height / 1.1,
+              decoration: BoxDecoration(
+                color: UniversalVariables.blackColor,
+                borderRadius: new BorderRadius.only(
+                  topLeft: const Radius.circular(25.0),
+                  topRight: const Radius.circular(25.0),
+                ),
+              ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      child: Row(
+                        children: <Widget>[
+                          WillPopScope(
+                            onWillPop: () => (titleController.text.length !=
+                                        0 ||
                                     descriptionController.text.length != 0)
-                                    ? showDialog<bool>(
-                                  context: context,
-                                  builder: (c) {
-                                    return AlertDialog(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0))),
-                                      backgroundColor:
-                                      UniversalVariables.separatorColor,
-                                      title: Text(
-                                        'Save as draft?',
-                                        style: GoogleFonts.raleway(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 20),
-                                      ),
-                                      content: Text(
-                                        'Drafts let you save your work, so you can edit it later',
-                                        style: GoogleFonts.raleway(
-                                            color: Colors.white,
-                                            //fontWeight: FontWeight.w700,
-                                            fontSize: 15),
-                                      ),
-                                      actions: [
-                                        FlatButton(
-                                          child: Text(
-                                            'DISCARD',
-                                            style:
-                                            TextStyle(color: Colors.white),
-                                          ),
-                                          onPressed: () {
-                                            titleController.clear();
-                                            descriptionController.clear();
-                                            Navigator.pop(c, true);
-                                          },
+                                ? showDialog<bool>(
+                                    context: context,
+                                    builder: (c) {
+                                      return AlertDialog(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(30.0))),
+                                        backgroundColor:
+                                            UniversalVariables.separatorColor,
+                                        title: Text(
+                                          'Save as draft?',
+                                          style: GoogleFonts.raleway(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 20),
                                         ),
-                                        FlatButton(
-                                          child: Text(
-                                            'SAVE AS DRAFT',
-                                            style:
-                                            TextStyle(color: Colors.white),
+                                        content: Text(
+                                          'Drafts let you save your work, so you can edit it later',
+                                          style: GoogleFonts.raleway(
+                                              color: Colors.white,
+                                              //fontWeight: FontWeight.w700,
+                                              fontSize: 15),
+                                        ),
+                                        actions: [
+                                          FlatButton(
+                                            child: Text(
+                                              'DISCARD',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            onPressed: () {
+                                              titleController.clear();
+                                              descriptionController.clear();
+                                              Navigator.pop(c, true);
+                                            },
                                           ),
-                                          onPressed: () {
-                                            //  String unpublishedDocID =
-                                            // randomAlphaNumeric(10);
-                                            if (titleController
-                                                .text.isNotEmpty ||
-                                                descriptionController
-                                                    .text.isNotEmpty) {
-                                              try {
-                                                Firestore.instance
-                                                    .collection(
-                                                    USERS_COLLECTION)
-                                                    .document(user.uid)
-                                                    .collection("unpublished")
-                                                    .document(postDocId)
-                                                    .updateData({
-                                                  "title": titleController.text,
-                                                  "description":
+                                          FlatButton(
+                                            child: Text(
+                                              'SAVE AS DRAFT',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            onPressed: () {
+                                              //  String unpublishedDocID =
+                                              // randomAlphaNumeric(10);
+                                              if (titleController
+                                                      .text.isNotEmpty ||
                                                   descriptionController
-                                                      .text,
-                                                  "time": DateTime.now(),
-                                                  'unpublishedDocID': postDocId,
-                                                  "tags": options[selectedIdx],
-                                                  "userAvatar":
-                                                  user.profilePhoto,
-                                                  "userName": user.name,
-                                                  "postedByUserUid": user.uid,
-                                                }).then((value) {
-                                                  titleController.clear();
-                                                  descriptionController.clear();
-                                                  Navigator.pop(c, true);
-                                                });
-                                              } catch (e) {
-                                                print(e.message);
+                                                      .text.isNotEmpty) {
+                                                try {
+                                                  Firestore.instance
+                                                      .collection(
+                                                          USERS_COLLECTION)
+                                                      .document(user.uid)
+                                                      .collection("unpublished")
+                                                      .document(postDocId)
+                                                      .updateData({
+                                                    "title":
+                                                        titleController.text,
+                                                    "description":
+                                                        descriptionController
+                                                            .text,
+                                                    "time": DateTime.now(),
+                                                    'unpublishedDocID':
+                                                        postDocId,
+                                                    "tags":
+                                                        options[selectedIdx],
+                                                    "userAvatar":
+                                                        user.profilePhoto,
+                                                    "userName": user.name,
+                                                    "postedByUserUid": user.uid,
+                                                  }).then((value) {
+                                                    titleController.clear();
+                                                    descriptionController
+                                                        .clear();
+                                                    Navigator.pop(c, true);
+                                                  });
+                                                } catch (e) {
+                                                  print(e.message);
+                                                }
                                               }
-                                            }
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                )
-                                    : Future<bool>.value(true),
-                                child: FlatButton(
-                                  child: Icon(
-                                    Icons.close,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () => Navigator.maybePop(context),
-                                ),
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  )
+                                : Future<bool>.value(true),
+                            child: FlatButton(
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.white,
                               ),
-                              Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Unpublished",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.raleway(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ),
-                            ],
+                              onPressed: () => Navigator.maybePop(context),
+                            ),
                           ),
-                        ),
-                        Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: ListView(
-                              children: <Widget>[
-                                TextFormField(
-                                  maxLength: 20,
-                                  //scrollController: _controller,
-                                  //expands: true,
-                                  controller: titleController,
-                                  autofocus: true,
-                                  autocorrect: false,
-                                  keyboardType: TextInputType.multiline,
-                                  style: GoogleFonts.raleway(
-                                      letterSpacing: 1.2, color: Colors.white),
-                                  minLines: 1,
-                                  maxLines: 2,
-                                  cursorColor: Colors.deepPurple,
-                                  validator: (String value) {
-                                    if (value.isEmpty) {
-                                      return "Please enter title";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  decoration: InputDecoration(
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Unpublished",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.raleway(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: ListView(
+                          children: <Widget>[
+                            TextFormField(
+                              maxLength: 20,
+                              //scrollController: _controller,
+                              //expands: true,
+                              controller: titleController,
+                              autofocus: true,
+                              autocorrect: false,
+                              keyboardType: TextInputType.multiline,
+                              style: GoogleFonts.raleway(
+                                  letterSpacing: 1.2, color: Colors.white),
+                              minLines: 1,
+                              maxLines: 2,
+                              cursorColor: Colors.deepPurple,
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return "Please enter title";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              decoration: InputDecoration(
+                                  //contentPadding: EdgeInsets.symmetric(
+                                  //   vertical: 50.0, horizontal: 10.0),
+                                  counterStyle: TextStyle(
+                                      letterSpacing: 1.2,
+                                      color: Colors.white,
+                                      fontSize: 10),
+                                  filled: true,
+                                  fillColor: UniversalVariables.separatorColor,
+                                  hintText: 'Title',
+                                  hintStyle: GoogleFonts.raleway(
+                                      color: Colors.white70,
+                                      fontWeight: FontWeight.w500),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.deepPurple))),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Container(
+                              height: 120,
+                              child: TextFormField(
+                                //scrollController: _controller,
+                                controller: descriptionController,
+                                expands: true,
+                                autofocus: true,
+                                autocorrect: false,
+                                keyboardType: TextInputType.multiline,
+                                style: GoogleFonts.raleway(
+                                    letterSpacing: 1.2, color: Colors.white),
+                                minLines: null,
+                                maxLines: null,
+                                cursorColor: Colors.deepPurple,
+                                validator: (String value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter Description";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
                                     //contentPadding: EdgeInsets.symmetric(
                                     //   vertical: 50.0, horizontal: 10.0),
-                                      counterStyle: TextStyle(
-                                          letterSpacing: 1.2,
-                                          color: Colors.white,
-                                          fontSize: 10),
-                                      filled: true,
-                                      fillColor: UniversalVariables.separatorColor,
-                                      hintText: 'Title',
-                                      hintStyle: GoogleFonts.raleway(
-                                          color: Colors.white70,
-                                          fontWeight: FontWeight.w500),
-                                      focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                          BorderSide(color: Colors.deepPurple))),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
+                                    filled: true,
+                                    fillColor:
+                                        UniversalVariables.separatorColor,
+                                    hintText: 'Description',
+                                    hintStyle: GoogleFonts.raleway(
+                                        color: Colors.white70,
+                                        fontWeight: FontWeight.w500),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.deepPurple))),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
                                 Container(
-                                  height: 120,
-                                  child: TextFormField(
-                                    //scrollController: _controller,
-                                    controller: descriptionController,
-                                    expands: true,
-                                    autofocus: true,
-                                    autocorrect: false,
-                                    keyboardType: TextInputType.multiline,
-                                    style: GoogleFonts.raleway(
-                                        letterSpacing: 1.2, color: Colors.white),
-                                    minLines: null,
-                                    maxLines: null,
-                                    cursorColor: Colors.deepPurple,
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return "Please enter Description";
-                                      } else {
-                                        return null;
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      //contentPadding: EdgeInsets.symmetric(
-                                      //   vertical: 50.0, horizontal: 10.0),
-                                        filled: true,
-                                        fillColor: UniversalVariables.separatorColor,
-                                        hintText: 'Description',
-                                        hintStyle: GoogleFonts.raleway(
-                                            color: Colors.white70,
-                                            fontWeight: FontWeight.w500),
-                                        focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.deepPurple))),
+                                  height: size.height / 5,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: UniversalVariables.highlightColor,
+                                    borderRadius:
+                                        new BorderRadius.circular(20.0),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Tags",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.raleway(
+                                          fontSize: 16,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 30,
+                                  width: 10,
                                 ),
-                                Row(
-                                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Container(
-                                      height: size.height / 5,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                        color: UniversalVariables.highlightColor,
-                                        borderRadius: new BorderRadius.circular(20.0),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "Tags",
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.raleway(
-                                              fontSize: 16,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: size.height / 5,
-                                        width: size.width / 1.3,
-                                        decoration: BoxDecoration(
-                                          color: UniversalVariables.separatorColor,
-                                          borderRadius: BorderRadius.circular(20.0),
-                                        ),
-                                        child: SingleChildScrollView(
-                                          scrollDirection: Axis.vertical,
-                                          child: Wrap(
-                                            //spacing: 3.0,
-                                            //runSpacing: 2.0,
-                                            children: [
-                                              _createChips(context, setState, tagNum)
-                                            ],
-                                          ),
-                                        ),
-                                        //width: size.width,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    String postDocID = randomAlphaNumeric(10);
-                                    if (_formKey.currentState.validate()) {
-                                      try {
-                                        Firestore.instance
-                                            .collection("posts")
-                                            .document(postDocID)
-                                            .setData({
-                                          "title": titleController.text,
-                                          "description": descriptionController.text,
-                                          "time": DateTime.now(),
-                                          'postDocId': postDocID,
-                                          "tags": options[selectedIdx],
-                                          "userAvatar": user.profilePhoto,
-                                          "userName": user.name,
-                                          "likedByIds": [],
-                                          "postedByUserUid": user.uid,
-                                        }, merge: true).then((value) {
-                                          Firestore.instance
-                                              .collection(USERS_COLLECTION)
-                                              .document(userId)
-                                              .collection("unpublished")
-                                              .document(postDocId)
-                                              .delete();
-                                        });
-                                        Navigator.pop(context);
-                                      } catch (e) {
-                                        print(e.message);
-                                      }
-                                    }
-                                  },
+                                Expanded(
                                   child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0),
-                                        ),
-                                        color: Colors.deepPurpleAccent,
+                                    height: size.height / 5,
+                                    width: size.width / 1.3,
+                                    decoration: BoxDecoration(
+                                      color: UniversalVariables.separatorColor,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.vertical,
+                                      child: Wrap(
+                                        //spacing: 3.0,
+                                        //runSpacing: 2.0,
+                                        children: [
+                                          _createChips(
+                                              context, setState, tagNum)
+                                        ],
                                       ),
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                        ),
-                                      )),
+                                    ),
+                                    //width: size.width,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                String postDocID = randomAlphaNumeric(10);
+                                if (_formKey.currentState.validate()) {
+                                  try {
+                                    Firestore.instance
+                                        .collection("posts")
+                                        .document(postDocID)
+                                        .setData({
+                                      "title": titleController.text,
+                                      "description": descriptionController.text,
+                                      "time": DateTime.now(),
+                                      'postDocId': postDocID,
+                                      "tags": options[selectedIdx],
+                                      "userAvatar": user.profilePhoto,
+                                      "userName": user.name,
+                                      "likedByIds": [],
+                                      "postedByUserUid": user.uid,
+                                    }, merge: true).then((value) {
+                                      Firestore.instance
+                                          .collection(USERS_COLLECTION)
+                                          .document(userId)
+                                          .collection("unpublished")
+                                          .document(postDocId)
+                                          .delete();
+                                    });
+                                    Navigator.pop(context);
+                                  } catch (e) {
+                                    print(e.message);
+                                  }
+                                }
+                              },
+                              child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10.0),
+                                    ),
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  )),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              });
+                  ],
+                ),
+              ),
+            );
+          });
         });
   }
 
@@ -518,7 +532,7 @@ class _MainProfileState extends State<MainProfile>
                         children: [
                           Padding(
                             padding:
-                            EdgeInsets.fromLTRB(0, size.height / 4, 0, 0),
+                                EdgeInsets.fromLTRB(0, size.height / 4, 0, 0),
                             child: CachedImage(
                               user.profilePhoto,
                               isRound: true,
@@ -540,27 +554,27 @@ class _MainProfileState extends State<MainProfile>
                           ),
                           (user.year).toString() != null
                               ? Container(
-                            height: size.height / 29,
-                            width: size.width / 6,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: FittedBox(
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Center(
-                                  child: Text(
-                                    "${year_name[user.year]}",
-                                    style: GoogleFonts.raleway(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400),
+                                  height: size.height / 29,
+                                  width: size.width / 6,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
-                                ),
-                              ),
-                            ),
-                          )
+                                  child: FittedBox(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Center(
+                                        child: Text(
+                                          "${year_name[user.year]}",
+                                          style: GoogleFonts.raleway(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
                               : Container(),
                         ],
                       ),
@@ -656,10 +670,10 @@ class _MainProfileState extends State<MainProfile>
                             return GridView.builder(
                               cacheExtent: 9999999,
                               gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 8,
-                                  mainAxisSpacing: 4),
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 8,
+                                      mainAxisSpacing: 4),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               padding: EdgeInsets.all(size.height / 45),
@@ -671,7 +685,7 @@ class _MainProfileState extends State<MainProfile>
                                     .data.documents[index].data['description'];
                                 int lastIdx = shortDescription.length;
                                 Timestamp time =
-                                snapshot.data.documents[index].data['time'];
+                                    snapshot.data.documents[index].data['time'];
                                 if (lastIdx > 35) {
                                   shortDescription =
                                       shortDescription.substring(0, 33);
@@ -684,21 +698,20 @@ class _MainProfileState extends State<MainProfile>
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-
                                             Navigator.push(context,
                                                 MaterialPageRoute(
                                                     builder: (context) {
-                                                      return OpenPost(
-                                                        postDocumentId: snapshot
-                                                            .data
-                                                            .documents[index]
-                                                            .data['postDocId'],
-                                                        postImageLink: snapshot
-                                                            .data
-                                                            .documents[index]
-                                                            .data['tags'],
-                                                      );
-                                                    }));
+                                              return OpenPost(
+                                                postDocumentId: snapshot
+                                                    .data
+                                                    .documents[index]
+                                                    .data['postDocId'],
+                                                postImageLink: snapshot
+                                                    .data
+                                                    .documents[index]
+                                                    .data['tags'],
+                                              );
+                                            }));
                                           },
                                           child: Container(
                                             width: size.width / 2,
@@ -716,11 +729,11 @@ class _MainProfileState extends State<MainProfile>
                                                   .separatorColor
                                                   .withOpacity(0.1),
                                               borderRadius:
-                                              BorderRadius.circular(20.0),
+                                                  BorderRadius.circular(20.0),
                                             ),
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Stack(
                                                   children: [
@@ -729,31 +742,33 @@ class _MainProfileState extends State<MainProfile>
                                                       width: size.width / 1.8,
                                                       child: ClipRRect(
                                                         borderRadius:
-                                                        BorderRadius.only(
+                                                            BorderRadius.only(
                                                           topLeft:
-                                                          Radius.circular(
-                                                              20.0),
+                                                              Radius.circular(
+                                                                  20.0),
                                                           topRight:
-                                                          Radius.circular(
-                                                              20.0),
+                                                              Radius.circular(
+                                                                  20.0),
                                                         ),
                                                         child:
-                                                        CachedNetworkImage(
-                                                          fadeInDuration: Duration(
+                                                            CachedNetworkImage(
+                                                          fadeInDuration:
+                                                              Duration(
                                                             milliseconds: 10,
                                                           ),
                                                           imageUrl: Utils
                                                               .getPostPicture(
-                                                              snapshot
-                                                                  .data
-                                                                  .documents[
-                                                              index]
-                                                                  .data['tags']),
+                                                                  snapshot
+                                                                      .data
+                                                                      .documents[
+                                                                          index]
+                                                                      .data['tags']),
                                                           errorWidget: (context,
-                                                              url, error) =>
-                                                          new Icon(
+                                                                  url, error) =>
+                                                              new Icon(
                                                             Icons.error,
-                                                            color: Colors.white,),
+                                                            color: Colors.white,
+                                                          ),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
@@ -770,13 +785,13 @@ class _MainProfileState extends State<MainProfile>
                                                     child: Text(
                                                       "${snapshot.data.documents[index].data['title']}",
                                                       style:
-                                                      GoogleFonts.raleway(
-                                                          color:
-                                                          Colors.white,
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .w800),
+                                                          GoogleFonts.raleway(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w800),
                                                     ),
                                                   ),
                                                 ),
@@ -791,11 +806,11 @@ class _MainProfileState extends State<MainProfile>
                                                     child: Text(
                                                       Time.timeAgo(time),
                                                       style:
-                                                      GoogleFonts.raleway(
+                                                          GoogleFonts.raleway(
                                                         color: Colors.white70
                                                             .withOpacity(0.4),
                                                         fontWeight:
-                                                        FontWeight.w300,
+                                                            FontWeight.w300,
                                                       ),
                                                     ),
                                                   ),
@@ -856,10 +871,10 @@ class _MainProfileState extends State<MainProfile>
                             return GridView.builder(
                               cacheExtent: 9999999,
                               gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 8,
-                                  mainAxisSpacing: 4),
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 8,
+                                      mainAxisSpacing: 4),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               padding: EdgeInsets.all(size.height / 45),
@@ -868,7 +883,7 @@ class _MainProfileState extends State<MainProfile>
                               controller: _controller,
                               itemBuilder: (context, index) {
                                 Timestamp time =
-                                snapshot.data.documents[index].data['time'];
+                                    snapshot.data.documents[index].data['time'];
                                 String postDocId = snapshot.data
                                     .documents[index].data['unpublishedDocID'];
                                 return Column(
@@ -888,8 +903,8 @@ class _MainProfileState extends State<MainProfile>
                                                   .documents[index]
                                                   .data['title'];
                                               descriptionController.text =
-                                              snapshot.data.documents[index]
-                                                  .data['description'];
+                                                  snapshot.data.documents[index]
+                                                      .data['description'];
                                             });
 
                                             _editPost(
@@ -916,11 +931,11 @@ class _MainProfileState extends State<MainProfile>
                                                   .separatorColor
                                                   .withOpacity(0.1),
                                               borderRadius:
-                                              BorderRadius.circular(20.0),
+                                                  BorderRadius.circular(20.0),
                                             ),
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Stack(
                                                   children: [
@@ -929,29 +944,30 @@ class _MainProfileState extends State<MainProfile>
                                                       width: size.width / 1.8,
                                                       child: ClipRRect(
                                                         borderRadius:
-                                                        BorderRadius.only(
+                                                            BorderRadius.only(
                                                           topLeft:
-                                                          Radius.circular(
-                                                              20.0),
+                                                              Radius.circular(
+                                                                  20.0),
                                                           topRight:
-                                                          Radius.circular(
-                                                              20.0),
+                                                              Radius.circular(
+                                                                  20.0),
                                                         ),
                                                         child:
-                                                        CachedNetworkImage(
+                                                            CachedNetworkImage(
                                                           imageUrl: Utils
                                                               .getPostPicture(
-                                                              snapshot
-                                                                  .data
-                                                                  .documents[
-                                                              index]
-                                                                  .data['tags']),
-                                                          fadeInDuration: Duration(
-                                                              milliseconds: 10
-                                                          ),
+                                                                  snapshot
+                                                                      .data
+                                                                      .documents[
+                                                                          index]
+                                                                      .data['tags']),
+                                                          fadeInDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      10),
                                                           errorWidget: (context,
-                                                              url, error) =>
-                                                          new Icon(
+                                                                  url, error) =>
+                                                              new Icon(
                                                             Icons.error,
                                                             color: Colors.white,
                                                           ),
@@ -971,11 +987,11 @@ class _MainProfileState extends State<MainProfile>
                                                     child: Text(
                                                       Time.timeAgo(time),
                                                       style:
-                                                      GoogleFonts.raleway(
+                                                          GoogleFonts.raleway(
                                                         color: Colors.white70
                                                             .withOpacity(0.4),
                                                         fontWeight:
-                                                        FontWeight.w300,
+                                                            FontWeight.w300,
                                                       ),
                                                     ),
                                                   ),
