@@ -13,7 +13,7 @@ import 'package:flutterapp/screens/pageviews/logs/log_screen.dart';
 import 'package:flutterapp/screens/pageviews/profile/main_profile.dart';
 import 'package:flutterapp/screens/postscreens/post_screen.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
-import 'package:get_storage/get_storage.dart';
+// import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
 import 'pageviews/chats/chat_list_screen.dart';
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   PageController pageController;
   int _page = 0;
   UserProvider userProvider;
-  final userStudentTeacherSelected = GetStorage();
+  // final userStudentTeacherSelected = GetStorage();
   final AuthMethods _authMethods = AuthMethods();
   // final LogRepository _logRepository = LogRepository(isHive: true);
   // final LogRepository _logRepository = LogRepository(isHive: false);
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    userStudentTeacherSelected.write("isUserStudentTeacherSelected", true);
+    // userStudentTeacherSelected.write("isUserStudentTeacherSelected", true);
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       userProvider = Provider.of<UserProvider>(context, listen: false);
       await userProvider.refreshUser();

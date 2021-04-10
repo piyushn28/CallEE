@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/models/quizzes.dart';
 import 'package:flutterapp/resources/firebase_methods.dart';
 import 'package:flutterapp/screens/home_screen.dart';
+import 'package:flutterapp/screens/leaderboard/leaderboardUI.dart';
 import 'package:flutterapp/screens/quizscreens/createQuestions_screen.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -156,7 +157,10 @@ class _ScoringscreenState extends State<Scoringscreen> {
                   ),
                   SizedBox(height: size.height / 20),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LeaderboardUI()));
+                    },
                     child: new Container(
                       width: size.width / 1.4,
                       height: size.height / 13,
