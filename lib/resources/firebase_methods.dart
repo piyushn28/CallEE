@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterapp/constants/strings.dart';
+import 'package:flutterapp/models/quizAttempted.dart';
 import 'package:flutterapp/models/quizzes.dart';
 import 'package:flutterapp/models/user.dart';
 import 'package:flutterapp/provider/image_upload_provider.dart';
@@ -97,6 +98,34 @@ class FirebaseMethods {
       val = false;
     });
     return val;
+  }
+
+  Future<void> addQuizAnswered(
+      Quizzes quiz, QuizAttempted quizAttempted, User user) async {
+    quizAttempted.maxMarks = quiz.maxMarks;
+    quizAttempted.quizUID = quiz.quizUID;
+    quizAttempted.submittedOn = Timestamp.now();
+    quizAttempted.noOfQuestions = quiz.noOfQuestions;
+    quizAttempted.remainingTime = ((quiz.duration * 60) -
+            ((quizAttempted.submittedOn.millisecondsSinceEpoch -
+                        quizAttempted.startedOn.millisecondsSinceEpoch) /
+                    1000)
+                .round())
+        .abs();
+
+    try {
+      firestore
+          .collection('users')
+          .document(user.uid)
+          .collection('quizAttempted')
+          .document(quiz.quizUID)
+          .setData(
+            quizAttempted.toMap(quizAttempted),
+            merge: true,
+          );
+    } catch (e) {
+      print(e.message);
+    }
   }
 
   Future<bool> authenticateUser(FirebaseUser user) async {

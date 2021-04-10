@@ -7,136 +7,31 @@ import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:random_string/random_string.dart';
 
-class answerscreen extends StatefulWidget {
+class AnswerScreen extends StatefulWidget {
   @override
-  _answerscreenState createState() => _answerscreenState();
+  _AnswerScreenState createState() => _AnswerScreenState();
 }
 
-class _answerscreenState extends State<answerscreen> {
+class _AnswerScreenState extends State<AnswerScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: UniversalVariables.blackColor,
       body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: SafeArea(
-          child: SingleChildScrollView(
-           // child: Container(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: SafeArea(
+            child: SingleChildScrollView(
               padding: EdgeInsets.all(12.0),
               child: Column(
                 children: [
                   SizedBox(height: size.height / 20),
-                 /* Row(
-                    children: [
-                      SizedBox(
-                        width: size.width / 20,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: size.width / 1.4,
-                            right: 0,
-                            top: size.width / 35,
-                            bottom: 0),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Ink(
-                            decoration: BoxDecoration(
-                              color: Colors.deepPurple,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Center(
-                              child: FittedBox(
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.clear,
-                                    color: Colors.white,
-                                    size: size.width / 13,
-                                  ),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ), */
-                  Align(
-                    alignment: Alignment.centerLeft,
-                      child: new Text("Report",
-                        style: GoogleFonts.raleway(
-                         // letterSpacing: 2.2,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 36.0,
-                          //fontWeight: FontWeight.w400,
-                        ),
-                      )
-                  ),
-                  const Divider(
-                    height: 10,
-                    thickness: 1
-                  ),
-                  SizedBox(height: size.height / 40),
-                  FittedBox(
-                    child: Container(
-                      width: size.width / 1.1,
-                        child: RichText(
-                          text: TextSpan(
-                              text: 'Correct:',
-                              style: GoogleFonts.raleway(
-                                color: Colors.green,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                //fontWeight: FontWeight.w400,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: ' 10',
-                                  style: GoogleFonts.raleway(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ]),
-                        ),
-                      ),
-                    ),
-                  FittedBox(
-                    child: Container(
-                      width: size.width / 1.1,
-                        child: RichText(
-                          text: TextSpan(
-                              text: 'InCorrect:',
-                              style: GoogleFonts.raleway(
-                                color: Colors.red,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                //fontWeight: FontWeight.w400,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: ' 10',
-                                  style: GoogleFonts.raleway(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ]),
-                        ),
-                    ),
-                  ),
-                  SizedBox(height: size.height / 20),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: new Text("Solutions",
+                      child: new Text(
+                        "Report",
                         style: GoogleFonts.raleway(
                           // letterSpacing: 2.2,
                           color: Colors.white,
@@ -144,17 +39,76 @@ class _answerscreenState extends State<answerscreen> {
                           fontSize: 36.0,
                           //fontWeight: FontWeight.w400,
                         ),
-                      )
+                      )),
+                  const Divider(height: 10, thickness: 1),
+                  SizedBox(height: size.height / 40),
+                  FittedBox(
+                    child: Container(
+                      width: size.width / 1.1,
+                      child: RichText(
+                        text: TextSpan(
+                            text: 'Correct:',
+                            style: GoogleFonts.raleway(
+                              color: Colors.green,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                              //fontWeight: FontWeight.w400,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: ' 10',
+                                style: GoogleFonts.raleway(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
                   ),
-                  const Divider(
-                      height: 10,
-                      thickness: 1
+                  FittedBox(
+                    child: Container(
+                      width: size.width / 1.1,
+                      child: RichText(
+                        text: TextSpan(
+                            text: 'InCorrect:',
+                            style: GoogleFonts.raleway(
+                              color: Colors.red,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                              //fontWeight: FontWeight.w400,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: ' 10',
+                                style: GoogleFonts.raleway(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
                   ),
+                  SizedBox(height: size.height / 20),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: new Text(
+                        "Solutions",
+                        style: GoogleFonts.raleway(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 36.0,
+                        ),
+                      )),
+                  const Divider(height: 10, thickness: 1),
                   ListView.separated(
                     shrinkWrap: true,
                     itemCount: 5,
-                    itemBuilder: (context,index) => answerui(
-                      index: index +1,
+                    itemBuilder: (context, index) => AnswerUI(
+                      index: index + 1,
                     ),
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
@@ -188,10 +142,7 @@ class _answerscreenState extends State<answerscreen> {
                 ],
               ),
             ),
-          )
-      ),
-
-        );
-
+          )),
+    );
   }
 }

@@ -25,7 +25,7 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
         leaderboardList.add(NameAndPoints(
           name: doc.data['name'],
           uid: doc.data['uid'],
-          totalMarks: doc.data['totalMarks'],
+          totalMarksInDouble: doc.data['totalMarks'],
         ));
       });
       setState(() {});
@@ -93,7 +93,7 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
                   ),
                   Align(
                     alignment: Alignment(-0.9, -0.5),
-                    child: topthree(
+                    child: TopThree(
                       index: 2,
                       userDetails: leaderboardList.length > 1
                           ? leaderboardList[1]
@@ -102,7 +102,7 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
                   ),
                   Align(
                       alignment: Alignment(0.0, -4.5),
-                      child: topthree(
+                      child: TopThree(
                         large: true,
                         index: 1,
                         userDetails: leaderboardList.length > 0
@@ -111,7 +111,7 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
                       )),
                   Align(
                     alignment: Alignment(0.9, -0.5),
-                    child: topthree(
+                    child: TopThree(
                       index: 3,
                       userDetails: leaderboardList.length > 2
                           ? leaderboardList[2]
@@ -161,10 +161,12 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
                   Container(
                     child: ListView.separated(
                       shrinkWrap: true,
-                      itemCount: leaderboardList.length - 3,
+                      itemCount: leaderboardList.length > 3
+                          ? leaderboardList.length - 3
+                          : 0,
                       itemBuilder: (context, index) => Leaderboardprofile(
                         index: index + 4,
-                        userDetails: leaderboardList.length > 2
+                        userDetails: leaderboardList.length > 3
                             ? leaderboardList[index + 3]
                             : null,
                       ),
@@ -178,10 +180,12 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
                   Container(
                     child: ListView.separated(
                       shrinkWrap: true,
-                      itemCount: leaderboardList.length - 3,
+                      itemCount: leaderboardList.length > 3
+                          ? leaderboardList.length - 3
+                          : 0,
                       itemBuilder: (context, index) => Leaderboardprofile(
                         index: index + 4,
-                        userDetails: leaderboardList.length > 2
+                        userDetails: leaderboardList.length > 3
                             ? leaderboardList[index + 3]
                             : null,
                       ),
@@ -205,7 +209,11 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
 class NameAndPoints {
   String name;
   String uid;
-  double totalMarks;
+  double totalMarksInDouble;
+  int totalMarks;
 
-  NameAndPoints({this.name, this.uid, this.totalMarks});
+  NameAndPoints(
+      {this.name, this.uid, this.totalMarks, this.totalMarksInDouble}) {
+    this.totalMarks = this.totalMarksInDouble.round();
+  }
 }

@@ -16,12 +16,12 @@ import 'package:flutterapp/screens/quizscreens/scoring_screen.dart';
 import 'package:flutterapp/screens/search_screen.dart';
 import 'package:flutterapp/screens/student_teacher_selection.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
-import 'package:get_storage/get_storage.dart';
+// import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:get/get.dart' as gett;
+// import 'package:get/get.dart' as gett;
 
 void main() async {
-  await GetStorage.init();
+  // await GetStorage.init();
   //SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(MyApp());
 }
@@ -35,8 +35,8 @@ class _MyAppState extends State<MyApp> {
   final AuthMethods _authMethods = AuthMethods();
   Widget initialScreen = LoginScreenTemp();
 
-  final userGoogleLogin = GetStorage();
-  final userStudentTeacherSelected = GetStorage();
+  // final userGoogleLogin = GetStorage();
+  // final userStudentTeacherSelected = GetStorage();
 
   String currPage = 'LoginPage';
   // currPage (initially): LoginPage
@@ -50,21 +50,21 @@ class _MyAppState extends State<MyApp> {
     ));*/
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     //SystemChrome.setEnabledSystemUIOverlays ([SystemUiOverlay.top]);
-    userGoogleLogin.writeIfNull("isUserGoogleLogin", false);
-    userStudentTeacherSelected.writeIfNull(
-        "isUserStudentTeacherSelected", false);
+    // userGoogleLogin.writeIfNull("isUserGoogleLogin", false);
+    // userStudentTeacherSelected.writeIfNull(
+    //     "isUserStudentTeacherSelected", false);
 
     // Initial Check for opening the first page
 
     // If User, Google Logged & Filled Student Teacher Details
-    if (userGoogleLogin.read("isUserGoogleLogin") &&
-        userStudentTeacherSelected.read("isUserStudentTeacherSelected")) {
-      currPage = 'HomeScreen';
-    }
-    //If User, Only Google Logged
-    else if (userGoogleLogin.read("isUserGoogleLogin")) {
-      currPage = 'StudentTeacherPage';
-    }
+    // if (userGoogleLogin.read("isUserGoogleLogin") &&
+    //     userStudentTeacherSelected.read("isUserStudentTeacherSelected")) {
+    //   currPage = 'HomeScreen';
+    // }
+    // //If User, Only Google Logged
+    // else if (userGoogleLogin.read("isUserGoogleLogin")) {
+    //   currPage = 'StudentTeacherPage';
+    // }
   }
 
   @override
@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
           '/home_screen': (context) => HomeScreen(),
         },
         // home: answerscreen(),
-         home: currPage == "LoginPage"
+        home: currPage == "LoginPage"
             ? LoginScreenTemp()
             : currPage == "HomeScreen"
                 ? HomeScreen()

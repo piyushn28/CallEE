@@ -6,13 +6,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:flutterapp/models/quizAttempted.dart';
 import 'package:flutterapp/models/quizQuestions.dart';
 import 'package:flutterapp/models/quizzes.dart';
 import 'package:flutterapp/models/user.dart';
 import 'package:flutterapp/resources/firebase_methods.dart';
 import 'package:flutterapp/screens/home_screen.dart';
 import 'package:flutterapp/screens/quizscreens/scoring_screen.dart';
-// import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:lottie/lottie.dart';
@@ -32,6 +32,7 @@ class _PlayQuizState extends State<PlayQuiz> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   int _questionNo = 1;
   List<String> answerList = [];
+  QuizAttempted quizAttempted = QuizAttempted();
 
   //Variables for option selection.
   bool option1Selected = false;
@@ -62,9 +63,10 @@ class _PlayQuizState extends State<PlayQuiz> {
     duration = (widget.quiz.duration * 60);
     endTime = DateTime.now().millisecondsSinceEpoch +
         (1000 * (widget.quiz.duration * 60));
+    quizAttempted.startedOn = Timestamp.now();
     timeController = CountdownTimerController(
       endTime: endTime,
-      onEnd: onQuizEnd,
+      onEnd: onTimerEnd,
     );
   }
 
@@ -74,11 +76,31 @@ class _PlayQuizState extends State<PlayQuiz> {
     super.dispose();
   }
 
+  void onTimerEnd() {
+    for (int i = 0; i < widget.quiz.noOfQuestions; i++) {
+      if (answerList[i] == null) {
+        unattempted++;
+      }
+    }
+    onQuizEnd();
+  }
+
   void onQuizEnd() {
     FirebaseMethods()
         .updateUserTotalMarks(widget.user, userMarks)
         .then((value) {
       print(value);
+
+      quizAttempted.answered = answerList;
+      quizAttempted.correct = correctAnswers;
+      quizAttempted.incorrect = incorrectAnswers;
+      quizAttempted.scoredMarks = userMarks;
+      quizAttempted.unattempted = unattempted;
+      FirebaseMethods()
+          .addQuizAnswered(widget.quiz, quizAttempted, widget.user)
+          .then((value) {
+        print('Answers Stored');
+      });
 
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) =>
@@ -131,35 +153,28 @@ class _PlayQuizState extends State<PlayQuiz> {
                         child: CountdownTimer(
                           endTime: endTime,
                           controller: timeController,
-                          onEnd: onQuizEnd,
+                          onEnd: onTimerEnd,
                           widgetBuilder: (context, remainingTime) {
                             return Stack(
                               children: [
                                 LayoutBuilder(
                                   builder: (context, constraints) => Container(
                                     width: size.width *
-                                        ((((remainingTime.min == null
+                                        (remainingTime == null
+                                            ? 0
+                                            : ((((remainingTime.min == null
+                                                            ? 0.0
+                                                            : remainingTime
+                                                                .min) *
+                                                        60) +
+                                                    (remainingTime.sec == null
                                                         ? 0.0
-                                                        : remainingTime.min) *
-                                                    60) +
-                                                (remainingTime.sec == null
-                                                    ? 0.0
-                                                    : remainingTime.sec)) /
-                                            duration),
+                                                        : remainingTime.sec)) /
+                                                duration)),
                                     decoration: BoxDecoration(
-                                      color: ((((remainingTime.min == null
-                                                              ? 0.0
-                                                              : remainingTime
-                                                                  .min) *
-                                                          60) +
-                                                      (remainingTime.sec == null
-                                                          ? 0.0
-                                                          : remainingTime
-                                                              .sec)) /
-                                                  duration) >
-                                              0.6
-                                          ? Colors.green
-                                          : ((((remainingTime.min == null
+                                      color: remainingTime == null
+                                          ? Colors.red
+                                          : (((((remainingTime.min == null
                                                                   ? 0.0
                                                                   : remainingTime
                                                                       .min) *
@@ -170,9 +185,23 @@ class _PlayQuizState extends State<PlayQuiz> {
                                                               : remainingTime
                                                                   .sec)) /
                                                       duration) >
-                                                  0.2
-                                              ? Colors.orange
-                                              : Colors.red,
+                                                  0.6
+                                              ? Colors.green
+                                              : ((((remainingTime.min == null
+                                                                      ? 0.0
+                                                                      : remainingTime
+                                                                          .min) *
+                                                                  60) +
+                                                              (remainingTime
+                                                                          .sec ==
+                                                                      null
+                                                                  ? 0.0
+                                                                  : remainingTime
+                                                                      .sec)) /
+                                                          duration) >
+                                                      0.2
+                                                  ? Colors.orange
+                                                  : Colors.red),
                                       borderRadius: BorderRadius.circular(50),
                                     ),
                                   ),
@@ -186,7 +215,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          " ${(remainingTime.min == null ? '00' : remainingTime.min)}:${(remainingTime.sec == null ? '00' : remainingTime.sec)} min",
+                                          " ${remainingTime == null ? '00' : (remainingTime.min == null ? '00' : remainingTime.min)}:${remainingTime == null ? '00' : (remainingTime.sec == null ? '00' : remainingTime.sec)} min",
                                           style: GoogleFonts.raleway(
                                             color: Colors.white,
                                           ),
@@ -266,6 +295,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                         }
 
                         return PageView.builder(
+                          physics: NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data.documents.length,
                           controller: pageController,
@@ -409,63 +439,54 @@ class _PlayQuizState extends State<PlayQuiz> {
                                           ),
                                           child: TextButton(
                                             onPressed: () {
-                                              if (!option1Selected &&
-                                                  !option2Selected &&
-                                                  !option3Selected &&
-                                                  !option4Selected) {
-                                                //TODO: Add Toast to select min 1 option.
-                                                print(
-                                                    'Select at least 1 option');
-                                                return;
+                                              String options = '';
+                                              if (option1Selected) {
+                                                options = options + '1';
+                                              }
+                                              if (option2Selected) {
+                                                options = options + '2';
+                                              }
+                                              if (option3Selected) {
+                                                options = options + '3';
+                                              }
+                                              if (option4Selected) {
+                                                options = options + '4';
+                                              }
+                                              answerList[_questionNo - 1] =
+                                                  options;
+                                              print(answerList);
+                                              double eachQuestionPoint =
+                                                  quiz.maxMarks /
+                                                      quiz.noOfQuestions;
+
+                                              if (answerList[_questionNo - 1] ==
+                                                      null ||
+                                                  answerList[_questionNo - 1] ==
+                                                      '') {
+                                                unattempted++;
+                                              } else if (answerList[
+                                                      _questionNo - 1] ==
+                                                  question.correctOption) {
+                                                userMarks = userMarks +
+                                                    eachQuestionPoint;
+                                                correctAnswers++;
                                               } else {
-                                                String options = '';
-                                                if (option1Selected) {
-                                                  options = options + '1';
-                                                }
-                                                if (option2Selected) {
-                                                  options = options + '2';
-                                                }
-                                                if (option3Selected) {
-                                                  options = options + '3';
-                                                }
-                                                if (option4Selected) {
-                                                  options = options + '4';
-                                                }
-                                                answerList[_questionNo - 1] =
-                                                    options;
-                                                print(answerList);
-                                                double eachQuestionPoint =
-                                                    quiz.maxMarks /
-                                                        quiz.noOfQuestions;
+                                                incorrectAnswers++;
+                                              }
 
-                                                if (answerList[
-                                                        _questionNo - 1] ==
-                                                    null) {
-                                                  unattempted++;
-                                                } else if (answerList[
-                                                        _questionNo - 1] ==
-                                                    question.correctOption) {
-                                                  userMarks = userMarks +
-                                                      eachQuestionPoint;
-                                                  correctAnswers++;
-                                                } else {
-                                                  incorrectAnswers++;
-                                                }
+                                              print(userMarks);
 
-                                                print(userMarks);
-
-                                                if (_questionNo ==
-                                                    quiz.noOfQuestions) {
-                                                  onQuizEnd();
-                                                  timeController.dispose();
-                                                } else {
-                                                  pageController.animateToPage(
-                                                    index + 1,
-                                                    duration: Duration(
-                                                        milliseconds: 500),
-                                                    curve: Curves.easeIn,
-                                                  );
-                                                }
+                                              if (_questionNo ==
+                                                  quiz.noOfQuestions) {
+                                                onQuizEnd();
+                                                timeController.dispose();
+                                              } else {
+                                                pageController.animateToPage(
+                                                  index + 1,
+                                                  duration: Duration(
+                                                      milliseconds: 500),
+                                                  curve: Curves.easeIn,
+                                                );
                                               }
                                             },
                                             child: Center(

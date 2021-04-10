@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/screens/leaderboard/leader_board.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class topthree extends StatelessWidget {
+class TopThree extends StatelessWidget {
   final bool large;
   final int index;
   final NameAndPoints userDetails;
 
-  const topthree({Key key, this.large = false, this.index, this.userDetails})
+  const TopThree({Key key, this.large = false, this.index, this.userDetails})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     Size size = MediaQuery.of(context).size;
     var r = TextStyle(color: Colors.purpleAccent, fontSize: 34);
     return Column(
@@ -46,7 +45,7 @@ class topthree extends StatelessWidget {
           ),
         ),
         Text(
-          "${userDetails == null ? '0' : userDetails.totalMarks} Points",
+          "${userDetails == null ? '0' : userDetails.totalMarks.toString()} Points",
           style: GoogleFonts.raleway(
             color: Colors.white,
           ),
