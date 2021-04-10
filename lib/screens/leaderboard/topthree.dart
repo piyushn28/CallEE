@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/screens/leaderboard/leaderboardUI.dart';
+import 'package:flutterapp/screens/leaderboard/leader_board.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class topthree extends StatelessWidget {

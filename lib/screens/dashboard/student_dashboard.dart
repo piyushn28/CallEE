@@ -9,7 +9,7 @@ import 'package:flutterapp/screens/chatscreens/widgets/cached_image.dart';
 import 'package:flutterapp/screens/dashboard/leaderboard_container.dart';
 import 'package:flutterapp/screens/dashboard/stuck_card.dart';
 import 'package:flutterapp/screens/dashboard/subject_category.dart';
-import 'package:flutterapp/screens/leaderboard/leaderboardUI.dart';
+import 'package:flutterapp/screens/leaderboard/leader_board.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:flutterapp/models/user.dart';
 import 'package:flutter/material.dart';

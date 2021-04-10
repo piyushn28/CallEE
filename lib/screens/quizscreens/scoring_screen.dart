@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/models/quizzes.dart';
 import 'package:flutterapp/resources/firebase_methods.dart';
 import 'package:flutterapp/screens/home_screen.dart';
-import 'package:flutterapp/screens/leaderboard/leaderboardUI.dart';
+import 'package:flutterapp/screens/leaderboard/leader_board.dart';
 import 'package:flutterapp/screens/quizscreens/createQuestions_screen.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:google_fonts/google_fonts.dart';

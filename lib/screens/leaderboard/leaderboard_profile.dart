@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/screens/leaderboard/leaderboardUI.dart';
+import 'package:flutterapp/screens/leaderboard/leader_board.dart';
 import 'package:flutterapp/screens/pageviews/chats/widgets/user_circle.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:google_fonts/google_fonts.dart';
