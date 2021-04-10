@@ -169,6 +169,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ],
             controller: pageController,
             onPageChanged: onPageChanged,
+
             //physics: NeverScrollableScrollPhysics(),
           ),
           /* bottomNavigationBar: CupertinoTabBar(
@@ -283,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
               },
             // animationCurve: Curves.easeInBack,
-            // animationDuration: const Duration(milliseconds: 300),
+             //animationDuration: const Duration(milliseconds: 300),
           ),
         ),
       ),

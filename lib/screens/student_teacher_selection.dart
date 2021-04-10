@@ -20,6 +20,9 @@ class StudentTeacherPage extends StatefulWidget {
 }
 
 class _StudentTeacherPageState extends State<StudentTeacherPage> {
+
+  //#Todo Controllers was used after being disposed. 2 errors here
+
   //GetX for user->Student/Teacher
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

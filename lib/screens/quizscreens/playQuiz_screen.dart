@@ -221,7 +221,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                                           ),
                                         ),
                                         WebsafeSvg.asset(
-                                            "assets/icons/clock.svg"),
+                                            "assets/stuteach/clock.svg"),
                                       ],
                                     ),
                                   ),

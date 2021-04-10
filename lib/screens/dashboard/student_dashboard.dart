@@ -242,7 +242,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                     GestureDetector(
                         onTap: () {
                           widget.pageController.animateToPage(
-                            4,
+                            3,
                             duration: Duration(milliseconds: 300),
                             curve: Curves.easeIn,
                           );

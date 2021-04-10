@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/screens/leaderboard/leaderboard_profile.dart';
@@ -26,6 +27,7 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
           name: doc.data['name'],
           uid: doc.data['uid'],
           totalMarksInDouble: doc.data['totalMarks'],
+          avatarUrl: doc.data['profile_photo']
         ));
       });
       setState(() {});
@@ -43,11 +45,14 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
         backgroundColor: UniversalVariables.blackColor,
         body: Column(
           children: [
+
             Row(
+
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(width: 15),
+                //SizedBox(width: size.width/50),
                 Padding(
-                  padding: EdgeInsets.only(top: 15),
+                  padding: EdgeInsets.fromLTRB(size.width/25,size.width/20,0,0),
                   child: InkWell(
                     onTap: () {
                       Navigator.pop(context);
@@ -76,7 +81,11 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
                     ),
                   ),
                 ),
+
               ],
+            ),
+            SizedBox(
+              height: size.height/20,
             ),
             Container(
               height: size.height / 5,
@@ -93,11 +102,23 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
                   ),
                   Align(
                     alignment: Alignment(-0.9, -0.5),
-                    child: TopThree(
-                      index: 2,
-                      userDetails: leaderboardList.length > 1
-                          ? leaderboardList[1]
-                          : null,
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 80,
+                          width: 80,
+                          color: Colors.redAccent,
+                          child: CachedNetworkImage(
+                            imageUrl: leaderboardList[1].avatarUrl,
+                          ),
+                        ),
+                        TopThree(
+                          index: 2,
+                          userDetails: leaderboardList.length > 1
+                              ? leaderboardList[1]
+                              : null,
+                        ),
+                      ],
                     ),
                   ),
                   Align(
@@ -211,9 +232,10 @@ class NameAndPoints {
   String uid;
   double totalMarksInDouble;
   int totalMarks;
+  String avatarUrl;
 
   NameAndPoints(
-      {this.name, this.uid, this.totalMarks, this.totalMarksInDouble}) {
+      {this.name, this.uid, this.totalMarks, this.totalMarksInDouble, this.avatarUrl}) {
     this.totalMarks = this.totalMarksInDouble.round();
   }
 }
