@@ -21,7 +21,7 @@
 
 ## Contributors:
 
-Team Name: OP Squad
+Team Name: Naughty Indian Crew
 
 * [Sumit Ojha](https://github.com/sumitsojha88)
 * [Piyush Nirala](https://github.com/piyushn28)
