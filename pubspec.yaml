@@ -57,6 +57,8 @@ dependencies:
   cache_image: ^1.0.5
   flutter_countdown_timer: ^4.0.2
   auto_size_text: ^2.1.0
+  animated_bottom_navigation_bar: ^0.3.2
+  curved_navigation_bar: ^0.3.7
 
 
 
