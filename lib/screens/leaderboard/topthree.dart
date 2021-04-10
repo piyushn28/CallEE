@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/screens/leaderboard/leaderboardUI.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class topthree extends StatelessWidget {
-
   final bool large;
   final int index;
+  final NameAndPoints userDetails;
 
-  const topthree({Key key,this.large=false,this.index}) : super(key: key);
+  const topthree({Key key, this.large = false, this.index, this.userDetails})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,86 +19,39 @@ class topthree extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Container(
-            width: large? 40.0:30.0,
-            height: large? 40.0:30.0,
-          child: Stack(
-          children: <Widget>[
-          /*  Flexible(child: Container()),
-            index == 1
-                ? Text("🥇", style: r)
-                : index == 2
-                ? Text(
-              "🥈",
-              style: r,
-            )
-                : index == 3
-                ? Text(
-              "🥉",
-              style: r,
-            )
-                : Text(''),
-            SizedBox(height: 10,), */
-           /*
-           ClipOval(
-              child: Container(
-                color: Colors.white,
-                padding: const EdgeInsets.all(4.0),
-                child: ClipOval(
-                  child: CircleAvatar(),
-                ),
-              ),
-            ),*/
-          /*  Align(
-              alignment: Alignment(0.0,0.0),
-              child: Container(
-                width: 25.0,
-                height: 25.0,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                // padding: EdgeInsets.all(8.0),
-                child: Center(child: Text(
-                  index==2?  "2" : index==3? "3" : "1",
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),)),
-              ),
-            ) */
-          ],
-          )
-        ),
-       // Flexible(child: Container()),
+            width: large ? 40.0 : 30.0,
+            height: large ? 40.0 : 30.0,
+            child: Stack(
+              children: <Widget>[],
+            )),
         index == 1
             ? Text("🥇", style: r)
             : index == 2
-            ? Text(
-          "🥈",
-          style: r,
-        )
-            : index == 3
-            ? Text(
-          "🥉",
-          style: r,
-        )
-            : Text(''),
-         Text("Sumit Ojha",
-           style: GoogleFonts.raleway(
-             fontWeight: FontWeight.bold,
-             color: Colors.white,
-             fontSize: index==1? 24.0 : 18.0,
-           ),
-         ),
-        Text("20 Points",
-        style: GoogleFonts.raleway(
-          color: Colors.white,
+                ? Text(
+                    "🥈",
+                    style: r,
+                  )
+                : index == 3
+                    ? Text(
+                        "🥉",
+                        style: r,
+                      )
+                    : Text(''),
+        Text(
+          '${userDetails == null ? 'Loading' : userDetails.name}',
+          style: GoogleFonts.raleway(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: index == 1 ? 24.0 : 18.0,
+          ),
         ),
+        Text(
+          "${userDetails == null ? '0' : userDetails.totalMarks} Points",
+          style: GoogleFonts.raleway(
+            color: Colors.white,
+          ),
         ),
       ],
     );
-
   }
-
 }
