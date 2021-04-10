@@ -55,37 +55,81 @@ class _LoginScreenTempState extends State<LoginScreenTemp>
         body: Stack(
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
                   child: Stack(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                        child: Text(
-                          'Welcome',
-                          style: GoogleFonts.raleway(
-                              color: Colors.white,
-                              fontSize: 50.0,
-                              fontWeight: FontWeight.bold),
+                        padding: EdgeInsets.fromLTRB(70.0, 150.0, 0.0, 0.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 100,
+                              width: 100,
+                              padding: EdgeInsets.fromLTRB(40.0, 110.0, 0.0, 0.0),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/stuteach/CallE_logo.png'
+                                          ''),
+                                  //  fit: BoxFit.fill,
+                                ),
+                                //    shape: BoxShape.circle,
+                              ),
+                            ),
+                            SizedBox(width: size.width /24),
+                            Text(
+                              'CALLE',
+                              style: GoogleFonts.merriweather(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 35,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(252.0, 110.0, 0.0, 0.0),
-                        child: Text(
-                          '!',
-                          style: GoogleFonts.merriweather(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepPurpleAccent,
-                            fontSize: 50,
-                          ),
-                        ),
-                      )
+
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: size.height / 2,
+                  height: size.height /3,
+                ),
+                Center(
+                  child: Text(
+                    "Welcome to CallE",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.raleway(
+                      color: Colors.white,
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: size.height /50),
+                Center(
+                  child: Text(
+                    "Interact with your senior and teachers.",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.raleway(
+                      color: Colors.grey,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    "Learn and enjoy your college life.",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.raleway(
+                      color: Colors.grey,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
                 ),
                 Container(
                     padding:
@@ -95,7 +139,8 @@ class _LoginScreenTempState extends State<LoginScreenTemp>
                         SizedBox(height: 10.0),
                         loginButton(context),
                       ],
-                    )),
+                    ),
+                ),
                 //Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -134,14 +179,15 @@ class _LoginScreenTempState extends State<LoginScreenTemp>
                   )
                 : Container(),
           ],
-        ));
+        )
+    );
   }
 
   Widget loginButton(BuildContext context) {
     return Container(
-      height: 40,
+      height: 50,
       child: FlatButton(
-        color: Color(0xFF17151B),
+        color: UniversalVariables.separatorColor,
         //padding: EdgeInsets.all(35),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -163,7 +209,7 @@ class _LoginScreenTempState extends State<LoginScreenTemp>
         ),
         onPressed: () => performLogin(context),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
       ),
     );
