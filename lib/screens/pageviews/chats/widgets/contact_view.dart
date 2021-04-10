@@ -54,7 +54,13 @@ class ViewLayout extends StatelessWidget {
   final ChatMethods _chatMethods = ChatMethods();
   ViewLayout({@required this.contact});
 
-  var year_name = {1: 'Fresher', 2: 'Sophomore', 3: 'Junior', 4: 'Senior'};
+  var year_name = {
+    1: 'Fresher',
+    2: 'Sophomore',
+    3: 'Junior',
+    4: 'Senior',
+    5: 'Alumini',
+  };
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
@@ -70,17 +76,17 @@ class ViewLayout extends StatelessWidget {
       title: Row(
         children: [
           Text(
-                contact?.name ??
-                    '..', // you can also just directly write contact.name coz contact.name is never gonna be null
-                // contact?.name is same as contact != null ? contact.name : null
-                // ?? - null operator eg: contact.name ?? '..' is same as contact.name != null ? contact.name : '..'
-                style: GoogleFonts.raleway(
-                  color: Colors.white,
-                  fontSize: 17,
-                ),
-              ),
+            contact?.name ??
+                '..', // you can also just directly write contact.name coz contact.name is never gonna be null
+            // contact?.name is same as contact != null ? contact.name : null
+            // ?? - null operator eg: contact.name ?? '..' is same as contact.name != null ? contact.name : '..'
+            style: GoogleFonts.raleway(
+              color: Colors.white,
+              fontSize: 17,
+            ),
+          ),
           SizedBox(
-            width: size.width/30,
+            width: size.width / 30,
           ),
           Container(
             height: size.height / 43,
@@ -91,7 +97,7 @@ class ViewLayout extends StatelessWidget {
             ),
             child: FittedBox(
               child: Padding(
-                padding:  EdgeInsets.all(size.width/150),
+                padding: EdgeInsets.all(size.width / 150),
                 child: Center(
                   child: Text(
                     "${year_name[contact.year]}",
@@ -106,8 +112,6 @@ class ViewLayout extends StatelessWidget {
           ),
         ],
       ),
-
-
       subtitle: LastMessageContainer(
         stream: _chatMethods.fetchLastMessageBetween(
             senderId: userProvider.getUser.uid, receiverId: contact.uid),

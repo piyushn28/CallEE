@@ -28,10 +28,12 @@ class _SearchScreenState extends State<SearchScreen> {
       _currYear = 1;
     } else if (choice == Constants.second_year) {
       _currYear = 2;
-    } else if (choice == Constants.third_third) {
+    } else if (choice == Constants.third_year) {
       _currYear = 3;
-    } else {
+    } else if (choice == Constants.fourth_year) {
       _currYear = 4;
+    } else {
+      _currYear = 5;
     }
   }
 

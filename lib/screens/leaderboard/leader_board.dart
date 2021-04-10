@@ -24,11 +24,10 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
         .then((snapshot) {
       snapshot.documents.forEach((doc) {
         leaderboardList.add(NameAndPoints(
-          name: doc.data['name'],
-          uid: doc.data['uid'],
-          totalMarksInDouble: doc.data['totalMarks'],
-          avatarUrl: doc.data['profile_photo']
-        ));
+            name: doc.data['name'],
+            uid: doc.data['uid'],
+            totalMarksInDouble: doc.data['totalMarks'],
+            avatarUrl: doc.data['profile_photo']));
       });
       setState(() {});
     });
@@ -45,14 +44,13 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
         backgroundColor: UniversalVariables.blackColor,
         body: Column(
           children: [
-
             Row(
-
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //SizedBox(width: size.width/50),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(size.width/25,size.width/20,0,0),
+                  padding: EdgeInsets.fromLTRB(
+                      size.width / 25, size.width / 20, 0, 0),
                   child: InkWell(
                     onTap: () {
                       Navigator.pop(context);
@@ -81,11 +79,10 @@ class _LeaderboardUIState extends State<LeaderboardUI> {
                     ),
                   ),
                 ),
-
               ],
             ),
             SizedBox(
-              height: size.height/20,
+              height: size.height / 20,
             ),
             Container(
               height: size.height / 5,
@@ -235,7 +232,11 @@ class NameAndPoints {
   String avatarUrl;
 
   NameAndPoints(
-      {this.name, this.uid, this.totalMarks, this.totalMarksInDouble, this.avatarUrl}) {
+      {this.name,
+      this.uid,
+      this.totalMarks,
+      this.totalMarksInDouble,
+      this.avatarUrl}) {
     this.totalMarks = this.totalMarksInDouble.round();
   }
 }

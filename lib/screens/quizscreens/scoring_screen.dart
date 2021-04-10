@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/models/quizzes.dart';
+import 'package:flutterapp/models/user.dart';
 import 'package:flutterapp/resources/firebase_methods.dart';
 import 'package:flutterapp/screens/home_screen.dart';
 import 'package:flutterapp/screens/leaderboard/leader_board.dart';
+import 'package:flutterapp/screens/quizscreens/answers_scoring_screen.dart';
 import 'package:flutterapp/screens/quizscreens/createQuestions_screen.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,8 +13,10 @@ import 'package:random_string/random_string.dart';
 class Scoringscreen extends StatefulWidget {
   final int maxMarks;
   final double userMarks;
+  final User user;
+  final Quizzes quiz;
 
-  Scoringscreen(this.userMarks, this.maxMarks);
+  Scoringscreen(this.userMarks, this.maxMarks, this.user, this.quiz);
 
   @override
   _ScoringscreenState createState() => _ScoringscreenState();
@@ -183,9 +187,9 @@ class _ScoringscreenState extends State<Scoringscreen> {
                   SizedBox(height: size.height / 50),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                          (route) => false);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              AnswerScreen(widget.user, widget.quiz)));
                     },
                     child: new Container(
                       width: size.width / 1.4,
@@ -197,7 +201,7 @@ class _ScoringscreenState extends State<Scoringscreen> {
                       ),
                       child: new Center(
                         child: new Text(
-                          'Home',
+                          'Solution',
                           style: new TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,

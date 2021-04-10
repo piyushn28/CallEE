@@ -47,7 +47,13 @@ class _OtherMainProfileState extends State<OtherMainProfile>
     _scrollViewController.dispose();
   }
 
-  var year_name = {1: 'Fresher', 2: 'Sophomore', 3: 'Junior', 4: 'Senior'};
+  var year_name = {
+    1: 'Fresher',
+    2: 'Sophomore',
+    3: 'Junior',
+    4: 'Senior',
+    5: 'Alumini',
+  };
   final _controller = ScrollController();
 
   TextEditingController titleController = new TextEditingController();
@@ -129,7 +135,7 @@ class _OtherMainProfileState extends State<OtherMainProfile>
                         padding: EdgeInsets.only(
                             left: 0, right: 0, top: size.width / 25, bottom: 0),
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
                           child: Ink(
@@ -143,7 +149,7 @@ class _OtherMainProfileState extends State<OtherMainProfile>
                                   icon: Icon(
                                     Icons.arrow_back_ios_rounded,
                                     color: Colors.white,
-                                    size: size.width/13,
+                                    size: size.width / 13,
                                   ),
                                   onPressed: () => Navigator.pop(context),
                                 ),
@@ -429,15 +435,20 @@ class _OtherMainProfileState extends State<OtherMainProfile>
                                                                         .documents[
                                                                             index]
                                                                         .data['tags']),
-                                                                    fadeInDuration: Duration(
-                                                                      milliseconds: 10,
-                                                                    ),
-                                                                errorWidget: (context,
-                                                                        url,
-                                                                        error) =>
-                                                                    new Icon(
-                                                                        Icons
-                                                                        .error,color: Colors.white,),
+                                                                fadeInDuration:
+                                                                    Duration(
+                                                                  milliseconds:
+                                                                      10,
+                                                                ),
+                                                                errorWidget:
+                                                                    (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        new Icon(
+                                                                  Icons.error,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
                                                                 fit: BoxFit
                                                                     .cover,
                                                               ),
