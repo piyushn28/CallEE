@@ -47,9 +47,6 @@ class _OpenPostState extends State<OpenPost> {
   List likedByIds = [];
   Color _likeBtnColor = UniversalVariables.greyColor;
   bool _isLiked = false;
-  List<String> choices = <String>[
-    "Delete Post",
-  ];
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
@@ -416,9 +413,9 @@ class _OpenPostState extends State<OpenPost> {
                             color: Colors.deepPurple,
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(15),
+                          child: Padding(
+                            padding:  EdgeInsets.all(size.width/30),
+                            child: Center(
                               child: Text(
                                 'Edit Post',
                                 style: GoogleFonts.raleway(
@@ -452,9 +449,9 @@ class _OpenPostState extends State<OpenPost> {
                           color: Colors.deepPurple,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
+                        child: Padding(
+                          padding: EdgeInsets.all(size.width/30),
+                          child: Center(
                             child: Text(
                               'Delete Post',
                               style: GoogleFonts.raleway(

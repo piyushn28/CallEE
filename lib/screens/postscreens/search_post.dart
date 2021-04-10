@@ -38,6 +38,11 @@ class _SearchPostScreenState extends State<SearchPostScreen> {
 
   searchAppBar(BuildContext context) {
     return AppBar(
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+            gradient: UniversalVariables.fabGradient
+        ),
+      ),
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back,

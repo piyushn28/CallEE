@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/constants/year_constants.dart';
 import 'package:flutterapp/models/user.dart';
 import 'package:flutterapp/resources/auth_methods.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:flutterapp/widgets/custom_tile.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'chatscreens/chat_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -17,6 +19,22 @@ class _SearchScreenState extends State<SearchScreen> {
   List<User> userList;
   String query = "";
   TextEditingController searchController = TextEditingController();
+  int _currYear=0;
+
+
+  void choiceAction(String choice){
+    if(choice==Constants.all_year){
+      _currYear=0;
+    }else if(choice == Constants.first_year) {
+      _currYear=1;
+    }else if(choice == Constants.second_year){
+      _currYear=2;
+    }else if(choice==Constants.third_third){
+      _currYear=3;
+    }else{
+      _currYear=4;
+    }
+  }
 
   @override
   void initState() {
@@ -31,7 +49,49 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   searchAppBar(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return AppBar(
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          gradient: UniversalVariables.fabGradient
+        ),
+      ),
+      actions: [
+        PopupMenuButton<String>(
+          color: UniversalVariables.separatorColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          icon: Icon(Icons.sort,color: Colors.white,),
+          onSelected: choiceAction,
+          offset: Offset(-1*size.width/10,size.height/30),
+          itemBuilder: (BuildContext context){
+            return Constants.choices.map((String choice){
+              return PopupMenuItem<String>(
+
+                value: choice,
+                child: Row(
+
+                  children: [
+                    Icon(Icons.arrow_forward_ios,color: Colors.deepPurpleAccent,
+                    size: 15,),
+                    SizedBox(width: size.width/50,),
+                    Text(choice,
+                      style: GoogleFonts.raleway(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Spacer(),
+                    Constants.choices[_currYear] == choice ? Icon(Icons.done_outlined,color: Colors.green,
+                      size: 23,):Container() ,
+                  ],
+                ),
+              );
+            }).toList();
+          },
+        ),
+      ],
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back,
@@ -39,6 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         onPressed: () => Navigator.pop(context),
       ),
+
       elevation: 0,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight + 20),
@@ -98,6 +159,8 @@ class _SearchScreenState extends State<SearchScreen> {
             //     (user.name.toLowerCase().contains(query.toLowerCase()))),
           }).toList();
 
+
+
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: ((context, index) {
@@ -105,9 +168,11 @@ class _SearchScreenState extends State<SearchScreen> {
             uid: suggestionList[index].uid,
             profilePhoto: suggestionList[index].profilePhoto,
             name: suggestionList[index].name,
-            username: suggestionList[index].username);
+            username: suggestionList[index].username,
+            year: suggestionList[index].year
+          );
 
-        return CustomTile(
+        return searchedUser.year==_currYear ? CustomTile(
           mini: false,
           onTap: () {
             Navigator.push(
@@ -132,7 +197,32 @@ class _SearchScreenState extends State<SearchScreen> {
             searchedUser.name,
             style: TextStyle(color: UniversalVariables.greyColor),
           ),
-        );
+        ) : _currYear==0 ? CustomTile(
+          mini: false,
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                      receiver: searchedUser,
+                    )));
+          },
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(searchedUser.profilePhoto),
+            backgroundColor: Colors.grey,
+          ),
+          title: Text(
+            searchedUser.username,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            searchedUser.name,
+            style: TextStyle(color: UniversalVariables.greyColor),
+          ),
+        ) : Container();
       }),
     );
   }

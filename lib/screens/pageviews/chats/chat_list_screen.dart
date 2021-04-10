@@ -80,7 +80,7 @@ class ChatListContainer extends StatelessWidget {
                 return QuietBox(
                   heading: "This is where all the contacts are listed",
                   subtitle:
-                      "Search for your friends and family to start calling or chatting with them",
+                      "Search for your friends and seniors to start calling or chatting with them",
                 );
               }
               return ListView.builder(

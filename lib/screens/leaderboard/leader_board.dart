@@ -5,21 +5,18 @@ import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-class leaderboardui extends StatefulWidget{
+class LeaderBoard extends StatefulWidget{
   @override
 
-  _leaderboarduiState createState() => _leaderboarduiState();
+  _LeaderBoardState createState() => _LeaderBoardState();
 }
 
 
-class _leaderboarduiState extends State<leaderboardui>{
+class _LeaderBoardState extends State<LeaderBoard>{
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    // width: size.width,
-    // height: size.height,
-    // TODO: implement buil
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -81,7 +78,7 @@ class _leaderboarduiState extends State<leaderboardui>{
                 tabs: <Widget>[
                   Tab(
                     child: Text(
-                      "     Current     ",
+                      "Current",
                       style: GoogleFonts.raleway(
                         fontSize: 16,
                         color: UniversalVariables.greyColor,
@@ -90,7 +87,7 @@ class _leaderboarduiState extends State<leaderboardui>{
                   ),
                   Tab(
                     child: Text(
-                      "     Overall     ",
+                      "Overall",
                       style: GoogleFonts.raleway(
                         color: UniversalVariables.greyColor,
                         fontSize: 16,

@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 
 class Utils {
   static String getUsername(String email) {
-    return "live:${email.split("@")[0]}";
+    return "@${email.split("@")[0]}";
   }
 
   // ignore: missing_return
