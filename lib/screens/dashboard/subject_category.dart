@@ -6,6 +6,7 @@ import 'package:flutterapp/models/user.dart';
 import 'package:flutterapp/resources/firebase_methods.dart';
 import 'package:flutterapp/screens/Dashboard/dashboard_constant.dart';
 import 'package:flutterapp/screens/Dashboard/subject_name.dart';
+import 'package:flutterapp/screens/quizscreens/answers_scoring_screen.dart';
 import 'package:flutterapp/screens/quizscreens/playQuiz_screen.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,8 +37,12 @@ class CategoryCard extends StatelessWidget {
           //TODO: open other page for created by user. Show toast for now.
           print('quiz is created by you only.');
         } else if (quiz.attemptedBy.contains(user.uid)) {
-          //TODO: Show scoring screen directly with his scores.
           print('You have already attempted the quiz.');
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AnswerScreen(this.user, this.quiz),
+            ),
+          );
         } else {
           FirebaseMethods()
               .updateQuizAttemptedBy(user, quiz)
