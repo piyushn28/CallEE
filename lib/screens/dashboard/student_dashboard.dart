@@ -76,7 +76,6 @@ class _StudentDashboardState extends State<StudentDashboard> {
                                       style: GoogleFonts.raleway(
                                         color: Colors.white,
                                         fontSize: 26.0,
-                                        //fontWeight: FontWeight.w400,
                                       ),
                                       children: [
                                         TextSpan(
@@ -183,7 +182,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.data == null) {
-                    //Todo:change this progress indicator
+                    //TODO:change this progress indicator
                     return Container(
                       height: size.width / 2,
                       child: Center(
