@@ -6,10 +6,11 @@ import 'package:flutterapp/provider/user_provider.dart';
 import 'package:flutterapp/resources/auth_methods.dart';
 import 'package:flutterapp/screens/dashboard/student_dashboard.dart';
 import 'package:flutterapp/screens/home_screen.dart';
-import 'package:flutterapp/screens/leaderboard/leader_board.dart';
+import 'package:flutterapp/screens/leaderboard/leaderboardUI.dart';
 import 'package:flutterapp/screens/login_screen.dart';
 import 'package:flutterapp/screens/login_screen_temp.dart';
 import 'package:flutterapp/screens/postscreens/add_post.dart';
+import 'package:flutterapp/screens/quizscreens/answers_scoring_screen.dart';
 import 'package:flutterapp/screens/quizscreens/createQuiz_screen.dart';
 import 'package:flutterapp/screens/quizscreens/scoring_screen.dart';
 import 'package:flutterapp/screens/search_screen.dart';
@@ -103,8 +104,8 @@ class _MyAppState extends State<MyApp> {
           '/search_screen': (context) => SearchScreen(),
           '/home_screen': (context) => HomeScreen(),
         },
-         //home: LeaderBoard(),
-        home: currPage == "LoginPage"
+        // home: answerscreen(),
+         home: currPage == "LoginPage"
             ? LoginScreenTemp()
             : currPage == "HomeScreen"
                 ? HomeScreen()

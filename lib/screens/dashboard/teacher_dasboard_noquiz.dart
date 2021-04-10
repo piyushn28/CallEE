@@ -7,6 +7,7 @@ import 'package:flutterapp/screens/Dashboard/search_bar_dashboard.dart';
 import 'package:flutterapp/screens/Dashboard/leaderboard_container.dart';
 import 'package:flutterapp/screens/Dashboard/stuck_card.dart';
 import 'package:flutterapp/screens/Dashboard/subject_category.dart';
+import 'package:flutterapp/screens/leaderboard/leaderboardUI.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
 
 import 'package:flutter/material.dart';
@@ -23,8 +24,7 @@ class TeacherNoQuizDashboard extends StatefulWidget {
 class _TeacherNoQuizDashboardState extends State<TeacherNoQuizDashboard> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
+    var size = MediaQuery.of(context)
         .size; //this gonna give us total height and with of our device
     return Scaffold(
       // bottomNavigationBar: BottomNavBar(),
@@ -60,8 +60,7 @@ class _TeacherNoQuizDashboardState extends State<TeacherNoQuizDashboard> {
                     style: GoogleFonts.raleway(
                         color: Colors.grey,
                         fontSize: 14.0,
-                        fontWeight: FontWeight.w600
-                    ),
+                        fontWeight: FontWeight.w600),
                   ),
                   Text(
                     "Hi,Sumit!",
@@ -72,16 +71,27 @@ class _TeacherNoQuizDashboardState extends State<TeacherNoQuizDashboard> {
                     ),
                   ),
                   SearchBar(),
-
-                  SizedBox(height: size.height / 70,),
-                  SizedBox(height: size.height / 70,),
-                  SizedBox(height: size.height / 70,),
-                  SizedBox(height: size.height / 70,),
-                  SizedBox(height: size.height / 70,),
-                  SizedBox(height: size.height / 70,),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 0.0),
-                    height: size.height /4,
+                    height: size.height / 4,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
@@ -92,18 +102,29 @@ class _TeacherNoQuizDashboardState extends State<TeacherNoQuizDashboard> {
                       ],
                     ),
                   ),
-                  SizedBox(height: size.height / 70,),
-                  SizedBox(height: size.height / 70,),
-                  SizedBox(height: size.height / 70,),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
+                  SizedBox(
+                    height: size.height / 70,
+                  ),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 0.0),
-                    height: size.height /4,
+                    height: size.height / 4,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
                         Container(
                           width: size.width / 1.15,
-                          //child: LeaderBoardCard(),
+                          child: LeaderBoardCard(
+                            press: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LeaderboardUI()));
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -117,5 +138,3 @@ class _TeacherNoQuizDashboardState extends State<TeacherNoQuizDashboard> {
     );
   }
 }
-
-
