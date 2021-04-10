@@ -13,8 +13,10 @@ import 'package:flutterapp/screens/pageviews/logs/log_screen.dart';
 import 'package:flutterapp/screens/pageviews/profile/main_profile.dart';
 import 'package:flutterapp/screens/postscreens/post_screen.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
-// import 'package:get_storage/get_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 import 'pageviews/chats/chat_list_screen.dart';
 
@@ -27,15 +29,54 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   PageController pageController;
   int _page = 0;
   UserProvider userProvider;
-  // final userStudentTeacherSelected = GetStorage();
+  final userStudentTeacherSelected = GetStorage();
   final AuthMethods _authMethods = AuthMethods();
   // final LogRepository _logRepository = LogRepository(isHive: true);
   // final LogRepository _logRepository = LogRepository(isHive: false);
 
+  int selectedIndex = 0;
+
+  int activeIndex;
+
+  /// Handler for when you want to programmatically change
+  /// the active index. Calling `setState()` here causes
+  /// Flutter to re-render the tree, which `AnimatedBottomNavigationBar`
+  /// responds to by running its normal animation.
+  void _onTap(int index) {
+    setState((){
+      activeIndex = index;
+    });
+  }
+
+  var _bottomNavIndex = 0;
+
+
+//default index of first screen
+  AnimationController _animationController;
+  Animation<double> animation;
+  CurvedAnimation curve;
+
+
+
+  final iconList = <IconData>[
+    Icons.home_outlined,
+    //  Icons.home_outlined,
+    Icons.chat,
+    Icons.call,
+    Icons.post_add,
+    Icons.person_rounded,
+  ];
+
+  /// Handler for when you want to programmatically change
+  /// the active index. Calling `setState()` here causes
+  /// Flutter to re-render the tree, which `AnimatedBottomNavigationBar`
+  /// responds to by running its normal animation.
+
+
   @override
   void initState() {
     super.initState();
-    // userStudentTeacherSelected.write("isUserStudentTeacherSelected", true);
+    userStudentTeacherSelected.write("isUserStudentTeacherSelected", true);
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       userProvider = Provider.of<UserProvider>(context, listen: false);
       await userProvider.refreshUser();
@@ -65,9 +106,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     String currentUserId =
-        (userProvider != null && userProvider.getUser != null)
-            ? userProvider.getUser.uid
-            : "";
+    (userProvider != null && userProvider.getUser != null)
+        ? userProvider.getUser.uid
+        : "";
 
     super.didChangeAppLifecycleState(state);
 
@@ -75,25 +116,25 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       case AppLifecycleState.resumed:
         currentUserId != null
             ? _authMethods.setUserState(
-                userId: currentUserId, userState: UserState.Online)
+            userId: currentUserId, userState: UserState.Online)
             : print("resume state");
         break;
       case AppLifecycleState.inactive:
         currentUserId != null
             ? _authMethods.setUserState(
-                userId: currentUserId, userState: UserState.Offline)
+            userId: currentUserId, userState: UserState.Offline)
             : print("inactive state");
         break;
       case AppLifecycleState.paused:
         currentUserId != null
             ? _authMethods.setUserState(
-                userId: currentUserId, userState: UserState.Waiting)
+            userId: currentUserId, userState: UserState.Waiting)
             : print("paused state");
         break;
       case AppLifecycleState.detached:
         currentUserId != null
             ? _authMethods.setUserState(
-                userId: currentUserId, userState: UserState.Offline)
+            userId: currentUserId, userState: UserState.Offline)
             : print("detached state");
         break;
     }
@@ -104,6 +145,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       _page = page;
     });
   }
+
+
 
   void navigationTapped(int page) {
     pageController.jumpToPage(page);
@@ -138,7 +181,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             onPageChanged: onPageChanged,
             //physics: NeverScrollableScrollPhysics(),
           ),
-          bottomNavigationBar: Container(
+          /* bottomNavigationBar: Container(
+       //   bottomNavigationBar: AnimatedBottomNavigationBar(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: CupertinoTabBar(
@@ -233,6 +277,30 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 currentIndex: _page,
               ),
             ),
+          ), */
+          floatingActionButton: FloatingActionButton(
+            focusColor: Colors.white,
+            backgroundColor: UniversalVariables.separatorColor,
+            child: const Icon(Icons.add, size: 30.0), splashColor: Colors.white,
+            foregroundColor: Colors.white,
+            onPressed: () {},
+            //params
+          ),
+          bottomNavigationBar: AnimatedBottomNavigationBar(
+            icons: iconList,
+            inactiveColor: Colors.white,
+            iconSize: 30,
+            activeIndex: _bottomNavIndex,
+            elevation: 5,
+            leftCornerRadius: 32,
+            rightCornerRadius: 32,
+            gapLocation: GapLocation.none,
+            notchSmoothness: NotchSmoothness.smoothEdge,
+            backgroundColor: UniversalVariables.separatorColor,
+            activeColor: Colors.deepPurpleAccent,
+            onTap: (index) => setState(() => _bottomNavIndex = index),
+            // animationCurve: Curves.easeInBack,
+            // animationDuration: const Duration(milliseconds: 300),
           ),
         ),
       ),

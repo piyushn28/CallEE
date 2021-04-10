@@ -7,22 +7,22 @@ import 'package:flutterapp/screens/login_screen.dart';
 import 'package:flutterapp/screens/pageviews/chats/widgets/shimmering_logo.dart';
 
 import 'package:flutterapp/widgets/appbar.dart';
-// import 'package:get_storage/get_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../login_screen_temp.dart';
 
 class UserDetailsContainer extends StatelessWidget {
-  // final userGoogleLogin = GetStorage();
-  // final userStudentTeacherSelected = GetStorage();
+  final userGoogleLogin = GetStorage();
+  final userStudentTeacherSelected = GetStorage();
   @override
   Widget build(BuildContext context) {
     signOut() async {
       final bool isLoggedOut = await AuthMethods().signOut();
       if (isLoggedOut) {
-        // userGoogleLogin.remove("isUserGoogleLogin");
-        // userStudentTeacherSelected.remove("isUserStudentTeacherSelected");
+        userGoogleLogin.remove("isUserGoogleLogin");
+        userStudentTeacherSelected.remove("isUserStudentTeacherSelected");
         // navigate to login screen and remove all previous screens
         Navigator.pushAndRemoveUntil(
             context,

@@ -51,12 +51,14 @@ dependencies:
   material_floating_search_bar: ^0.3.3
   anim_search_bar: ^2.0.0
   like_button: ^2.0.1
-  # get:
-  # get_storage: ^1.3.2
+  get:
+  get_storage: ^1.3.2
   shifting_tabbar: ^1.0.1
   cache_image: ^1.0.5
   flutter_countdown_timer: ^4.0.2
   auto_size_text: ^2.1.0
+  animated_bottom_navigation_bar: ^0.3.2
+  curved_navigation_bar: ^0.3.7
 
 
 

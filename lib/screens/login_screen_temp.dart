@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/auth_methods.dart';
 import 'package:flutterapp/screens/student_teacher_selection.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
-// import 'package:get_storage/get_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'home_screen.dart';
@@ -16,7 +16,7 @@ class LoginScreenTemp extends StatefulWidget {
 class _LoginScreenTempState extends State<LoginScreenTemp>
     with TickerProviderStateMixin {
   //GetX for GoogleLogin
-  // final userGoogleLogin = GetStorage();
+  final userGoogleLogin = GetStorage();
 
   AnimationController _loginButtonController;
   var animationStatus = 0;
@@ -176,7 +176,7 @@ class _LoginScreenTempState extends State<LoginScreenTemp>
     });
     _authMethods.signIn().then((FirebaseUser user) {
       //GetX
-      // userGoogleLogin.write("isUserGoogleLogin", true);
+      userGoogleLogin.write("isUserGoogleLogin", true);
 
       if (user != null) {
         authenticateUser(user, context);
