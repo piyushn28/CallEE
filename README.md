@@ -50,6 +50,7 @@ Some key benefits:
  
  * Flutter
  * Firebase
+ * SQLite
  * GetX
  * Agora SDK
  * Lottie
