@@ -1,5 +1,6 @@
 
 
+
 <h1 align="center">CALL E</h1>
 
 ![image](https://user-images.githubusercontent.com/53686487/114290517-e5bf6200-9a9d-11eb-9a6f-9a7419b5728b.png)
@@ -131,7 +132,7 @@ Team Name: Naughty Indian Crew
 ## ScreenShots:
 
 
-<img src='https://user-images.githubusercontent.com/54531841/114287887-7ab76080-9a88-11eb-91ce-550fd8e304aa.png' align='left' width='40%'>
+<img src='https://user-images.githubusercontent.com/53686487/114290890-7b5bf100-9aa0-11eb-80cb-a6a91eb5f459.png' align='left' width='40%'>
 
 <img src='https://user-images.githubusercontent.com/54531841/114288923-1d73dd00-9a91-11eb-954b-d296c722e815.png' align='left' width='40%'>
 
