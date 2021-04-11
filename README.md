@@ -1,5 +1,3 @@
-<img width="475" alt="4" src="https://user-images.githubusercontent.com/53686487/114290728-48652d80-9a9f-11eb-88a5-085ac4b43bf4.png">
-
 
 
 <h1 align="center">CALL E</h1>
