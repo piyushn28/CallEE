@@ -53,27 +53,21 @@ This is an education platform that primarily focuses on connecting freshers and 
    Problem 1 Solution: 
    
    1)The main objective of our hack was to build a bridge between juniors, seniors, alumni and professors of institute.
-   
    2)Our platform will help them interact (using messaging and video calling) with each other or post queries in post section under various categories.
    
    
    Problem 2 Solution: 
    
    1)Our platform provides features to conduct quizzes with live leaderboard.
-   
    2)Every question is once attemptable and can't be retrieved back after answering once. Hence the cheating is prevented.
-   
    3)Quizzes can be conducted and attempted by students in various fields like academics, job oriented, etc. 
 
 
 ## Wow Factor:
 
 1) A new post can be saved as a draft before posting it online.
-
 2) All the quizzes are timed, once the timer runs down, the Quiz get auto submitted irrespective of your responses.
-
 3) People can be searched on the basis of the tags(fresher, sophomore, junior, senior) to lookup for mentors or to act as mentors.
-
 4) Disabled Screenshot during Quizzes to prevent sharing of answers.
 
 
@@ -84,11 +78,8 @@ This is an education platform that primarily focuses on connecting freshers and 
 ## Future Work:
 
 1)Provide notifications of messages, phone calls, post likes/comments, upcoming quizzes.
-
 2)Categorize people on the basis of their area of interests/expertise.
-
 3)Add an e-library support for study resources and materials.
-
 4)Upload Resume and job listings.
 
 
