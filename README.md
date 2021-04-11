@@ -20,6 +20,7 @@
 This is an education platform that primarily focuses on connecting freshers and other students to their professors, seniors and alumini. A zero cheating platform for conducting quizzes.This app will be beneficial for all the students around the world consist of various institute and also various quzzing communities.
 
 Some key benefits:
+
 1)Contact with Classmates,professors,seniors and alumni.
 
 2)Information about institute happenings.
