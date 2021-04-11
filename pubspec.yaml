@@ -59,6 +59,7 @@ dependencies:
   auto_size_text: ^2.1.0
   animated_bottom_navigation_bar: ^0.3.2
   curved_navigation_bar: ^0.3.7
+  flutter_windowmanager: ^0.0.2
 
 
 

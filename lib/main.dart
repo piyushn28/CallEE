@@ -16,6 +16,7 @@ import 'package:flutterapp/screens/quizscreens/scoring_screen.dart';
 import 'package:flutterapp/screens/search_screen.dart';
 import 'package:flutterapp/screens/student_teacher_selection.dart';
 import 'package:flutterapp/utils/universal_variables.dart';
+import 'package:flutterapp/utils/utilities.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart' as gett;
@@ -24,6 +25,7 @@ void main() async {
   await GetStorage.init();
   //SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(MyApp());
+  Utils().secureScreen();
 }
 
 class MyApp extends StatefulWidget {
@@ -105,7 +107,7 @@ class _MyAppState extends State<MyApp> {
           '/home_screen': (context) => HomeScreen(),
         },
         //home: LoginScreenTemp(),
-         home: currPage == "LoginPage"
+        home: currPage == "LoginPage"
             ? LoginScreenTemp()
             : currPage == "HomeScreen"
                 ? HomeScreen()
