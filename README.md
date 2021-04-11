@@ -59,10 +59,24 @@
 
 ## Wow Factor:
 
+1) A new post can be saved as a draft before posting it online.
+
+2) All the quizzes are timed, once the timer runs down, the Quiz get auto submitted irrespective of your responses.
+
+3) People can be searched on the basis of the tags(fresher, sophomore, junior, senior) to lookup for mentors or to act as mentors.
+
 
 
 
 ## Future Work:
+
+1)Provide notifications of messages, phone calls, post likes/comments, upcoming quizzes.
+
+2)Categorize people on the basis of their area of interests/expertise.
+
+3)Add an e-library support for study resources and materials.
+
+
 
 ## Contributors:
 
@@ -73,13 +87,15 @@ Team Name: Naughty Indian Crew
 * [Priyansh Jain](https://github.com/ErR0rpj)
 
 
+
+### Made at:
+<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a>
+
+
+
 ## ScreenShots:
 
 ![image](https://user-images.githubusercontent.com/54531841/114287887-7ab76080-9a88-11eb-91ce-550fd8e304aa.png) ![image](https://user-images.githubusercontent.com/54531841/114287892-82770500-9a88-11eb-843f-33e0064ce7ea.png)
 
 ![image](https://user-images.githubusercontent.com/54531841/114287898-8acf4000-9a88-11eb-8f6a-593afe142206.png)
-
-
-### Made at:
-<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a>
 
