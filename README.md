@@ -10,14 +10,37 @@
 
 ## Introduction:
 
-  <h> Problems </h>
+## Demo Video Link:
+
+## Presentation Link:
   
-  "Unguided freshers lead to wrong direction"
+## Table of Contents:
+1) Technology Stack
+2) Problem
+3) Proposed Solution
+4) Wow factor
+5) Future Work
+
+
+## Technology Stack:
+ 
+  1) Flutter
+  2) Firebase
+  3) GetX
+  4) Agora SDK
+  5) Lottie
+
+
+## Problem:
+
+   "Unguided freshers lead to wrong direction"
    1) No platform exist where freshers or undergraduate can interact with seniors, alumni, professors of respective institute. College being conducted virtually these days, such       a platform is dire need of the new students, so that they can find mentors for themselves and set-up their future goals. 
    2) A Quizzing platform to prevent or reduce cheating unlike other various platforms is a dire need of professors and quizzing communities.
 
-  <h> Proposed Solution </h>
-  
+
+## Proposed Solution:
+
+
    Problem 1 Solution: 
    
    1)The main objective of our hack was to build a bridge between juniors, seniors, alumni and professors of institute.
@@ -34,25 +57,6 @@
    3)Quizzes can be conducted and attempted by students in various fields like academics, job oriented, etc. 
 
 
-
-
-
-
-
-
-
-  
-  Intro of the project
-  
-## Table of Contents:
-
-## Technology Stack:
-  1) Flutter
-  2) Firebase
-  3) GetX
-  4) Agora SDK
-  5) Lottie
-  
 
 ## Contributors:
 
