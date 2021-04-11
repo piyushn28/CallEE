@@ -1,7 +1,14 @@
 
-<h> Official repo of team Naughty Indian Crew for Hack36 4.0 </h>
 
 <h1 align="center">CALL E</h1>
+
+![image](https://user-images.githubusercontent.com/54531841/114288362-be13ce00-9a8c-11eb-8add-f62cacb07d17.png)
+
+
+
+
+<h> Official repo of team Naughty Indian Crew for Hack36 4.0 </h>
+
 <p align="center">
 </p>
 
