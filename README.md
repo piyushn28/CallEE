@@ -54,6 +54,7 @@ Some key benefits:
  * GetX
  * Agora SDK
  * Lottie
+ * Figma
 
 
 ## Problem:
