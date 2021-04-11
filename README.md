@@ -1,5 +1,5 @@
 
-<h> Official repo of team naughty Indian crew for Hack36 4.0 </h>
+<h> Official repo of team Naughty Indian Crew for Hack36 4.0 </h>
 
 <h1 align="center">CALL E</h1>
 <p align="center">
