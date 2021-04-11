@@ -76,6 +76,8 @@
 
 3)Add an e-library support for study resources and materials.
 
+4)Upload Resume and job listings.
+
 
 
 ## Contributors:
