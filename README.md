@@ -73,15 +73,13 @@ Team Name: Naughty Indian Crew
 * [Priyansh Jain](https://github.com/ErR0rpj)
 
 
-
-### Made at:
-<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a>
-
-
-
 ## ScreenShots:
 
 ![image](https://user-images.githubusercontent.com/54531841/114287887-7ab76080-9a88-11eb-91ce-550fd8e304aa.png) ![image](https://user-images.githubusercontent.com/54531841/114287892-82770500-9a88-11eb-843f-33e0064ce7ea.png)
 
 ![image](https://user-images.githubusercontent.com/54531841/114287898-8acf4000-9a88-11eb-8f6a-593afe142206.png)
+
+
+### Made at:
+<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a>
 
