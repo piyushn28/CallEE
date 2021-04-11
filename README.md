@@ -122,8 +122,11 @@ Team Name: Naughty Indian Crew
 
 ## ScreenShots:
 
-![image](https://user-images.githubusercontent.com/54531841/114287887-7ab76080-9a88-11eb-91ce-550fd8e304aa.png)
-![image](https://user-images.githubusercontent.com/54531841/114287892-82770500-9a88-11eb-843f-33e0064ce7ea.png)
+
+<img src='https://user-images.githubusercontent.com/54531841/114287887-7ab76080-9a88-11eb-91ce-550fd8e304aa.png' align='left' width='40%'>
+<img src='https://user-images.githubusercontent.com/54531841/114288923-1d73dd00-9a91-11eb-954b-d296c722e815.png' align='left' width='40%'>
+
+
 
 ![image](https://user-images.githubusercontent.com/54531841/114287898-8acf4000-9a88-11eb-8f6a-593afe142206.png)
 
