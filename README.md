@@ -17,7 +17,7 @@
 
 ## Introduction:
 
-This is an education platform that primarily focuses
+This is an education platform that primarily focuses on connecting freshers and other students to their professors, seniors and alumini.
 
 ## Demo Video Link:
 
