@@ -10,6 +10,8 @@
 
 ## Introduction:
 
+This is an education platform that primarily focuses
+
 ## Demo Video Link:
 
 ## Presentation Link:
