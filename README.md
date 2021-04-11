@@ -21,7 +21,7 @@ This is an education platform that primarily focuses on connecting freshers and 
 
 Some key benefits:
 
-1)Contact with Classmates,professors,seniors and alumni.
+* Contact with Classmates,professors,seniors and alumni.
 
 2)Information about institute happenings.
 
