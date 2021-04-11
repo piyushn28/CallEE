@@ -36,7 +36,13 @@ Some key benefits:
 
 ## Demo Video Link:
 
+https://www.youtube.com/watch?v=6ztswGV563o
+
+
 ## Presentation Link:
+ 
+ https://drive.google.com/file/d/1twE6WiEFXZUpAA3wuS26m_SfInVmJNF7/view?usp=sharing
+ 
   
 ## Table of Contents:
 * Technology Stack
