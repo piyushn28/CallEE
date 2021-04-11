@@ -23,15 +23,15 @@ Some key benefits:
 
 * Contact with Classmates,professors,seniors and alumni.
 
-2)Information about institute happenings.
+* Information about institute happenings.
 
-3)Access to College Resources.
+* Access to College Resources.
 
-4)Exclusive Online Job Listings.
+* Exclusive Online Job Listings.
 
-5)Wider Professional Network and  Connect with the Community.
+* Wider Professional Network and  Connect with the Community.
 
-6)Conduct and play Quizzes with live leaderboard.
+* Conduct and play Quizzes with live leaderboard.
 
 
 ## Demo Video Link:
@@ -39,27 +39,27 @@ Some key benefits:
 ## Presentation Link:
   
 ## Table of Contents:
-1) Technology Stack
-2) Problem
-3) Proposed Solution
-4) Wow factor
-5) Future Work
+* Technology Stack
+* Problem
+* Proposed Solution
+* Wow factor
+* Future Work
 
 
 ## Technology Stack:
  
-  1) Flutter
-  2) Firebase
-  3) GetX
-  4) Agora SDK
-  5) Lottie
+ * Flutter
+ * Firebase
+ * GetX
+ * Agora SDK
+ * Lottie
 
 
 ## Problem:
 
    "Unguided freshers lead to wrong direction"
-   1) No platform exist where freshers or undergraduate can interact with seniors, alumni, professors of respective institute. College being conducted virtually these days, such       a platform is dire need of the new students, so that they can find mentors for themselves and set-up their future goals. 
-   2) A Quizzing platform to prevent or reduce cheating unlike other various platforms is a dire need of professors and quizzing communities.
+   * No platform exist where freshers or undergraduate can interact with seniors, alumni, professors of respective institute. College being conducted virtually these days, such       a platform is dire need of the new students, so that they can find mentors for themselves and set-up their future goals. 
+   * A Quizzing platform to prevent or reduce cheating unlike other various platforms is a dire need of professors and quizzing communities.
 
 
 ## Proposed Solution:
@@ -67,26 +67,26 @@ Some key benefits:
 
    Problem 1 Solution: 
    
-   1)The main objective of our hack was to build a bridge between juniors, seniors, alumni and professors of institute.
+   * The main objective of our hack was to build a bridge between juniors, seniors, alumni and professors of institute.
    
-   2)Our platform will help them interact (using messaging and video calling) with each other or post queries in post section under various categories.
+   * Our platform will help them interact (using messaging and video calling) with each other or post queries in post section under various categories.
    
    
    Problem 2 Solution: 
    
-   1)Our platform provides features to conduct quizzes with live leaderboard.
+   * Our platform provides features to conduct quizzes with live leaderboard.
    
-   2)Every question is once attemptable and can't be retrieved back after answering once. Hence the cheating is prevented.
+   * Every question is once attemptable and can't be retrieved back after answering once. Hence the cheating is prevented.
    
-   3)Quizzes can be conducted and attempted by students in various fields like academics, job oriented, etc. 
+   * Quizzes can be conducted and attempted by students in various fields like academics, job oriented, etc. 
 
 
 ## Wow Factor:
 
-1) A new post can be saved as a draft before posting it online.
-2) All the quizzes are timed, once the timer runs down, the Quiz get auto submitted irrespective of your responses.
-3) People can be searched on the basis of the tags(fresher, sophomore, junior, senior) to lookup for mentors or to act as mentors.
-4) Disabled Screenshot during Quizzes to prevent sharing of answers.
+* A new post can be saved as a draft before posting it online.
+* All the quizzes are timed, once the timer runs down, the Quiz get auto submitted irrespective of your responses.
+* People can be searched on the basis of the tags(fresher, sophomore, junior, senior) to lookup for mentors or to act as mentors.
+* Disabled Screenshot during Quizzes to prevent sharing of answers.
 
 
 
@@ -95,13 +95,13 @@ Some key benefits:
 
 ## Future Work:
 
-1)Provide notifications of messages, phone calls, post likes/comments, upcoming quizzes.
+* Provide notifications of messages, phone calls, post likes/comments, upcoming quizzes.
 
-2)Categorize people on the basis of their area of interests/expertise.
+* Categorize people on the basis of their area of interests/expertise.
 
-3)Add an e-library support for study resources and materials.
+* Add an e-library support for study resources and materials.
 
-4)Upload Resume and job listings.
+* Upload Resume and job listings.
 
 
 
