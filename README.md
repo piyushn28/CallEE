@@ -53,13 +53,16 @@ This is an education platform that primarily focuses on connecting freshers and 
    Problem 1 Solution: 
    
    1)The main objective of our hack was to build a bridge between juniors, seniors, alumni and professors of institute.
+   
    2)Our platform will help them interact (using messaging and video calling) with each other or post queries in post section under various categories.
    
    
    Problem 2 Solution: 
    
    1)Our platform provides features to conduct quizzes with live leaderboard.
+   
    2)Every question is once attemptable and can't be retrieved back after answering once. Hence the cheating is prevented.
+   
    3)Quizzes can be conducted and attempted by students in various fields like academics, job oriented, etc. 
 
 
@@ -78,8 +81,11 @@ This is an education platform that primarily focuses on connecting freshers and 
 ## Future Work:
 
 1)Provide notifications of messages, phone calls, post likes/comments, upcoming quizzes.
+
 2)Categorize people on the basis of their area of interests/expertise.
+
 3)Add an e-library support for study resources and materials.
+
 4)Upload Resume and job listings.
 
 
@@ -101,7 +107,8 @@ Team Name: Naughty Indian Crew
 
 ## ScreenShots:
 
-![image](https://user-images.githubusercontent.com/54531841/114287887-7ab76080-9a88-11eb-91ce-550fd8e304aa.png) ![image](https://user-images.githubusercontent.com/54531841/114287892-82770500-9a88-11eb-843f-33e0064ce7ea.png)
+![image](https://user-images.githubusercontent.com/54531841/114287887-7ab76080-9a88-11eb-91ce-550fd8e304aa.png)
+![image](https://user-images.githubusercontent.com/54531841/114287892-82770500-9a88-11eb-843f-33e0064ce7ea.png)
 
 ![image](https://user-images.githubusercontent.com/54531841/114287898-8acf4000-9a88-11eb-8f6a-593afe142206.png)
 
