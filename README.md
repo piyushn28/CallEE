@@ -1,3 +1,4 @@
+<img width="475" alt="4" src="https://user-images.githubusercontent.com/53686487/114290728-48652d80-9a9f-11eb-88a5-085ac4b43bf4.png">
 
 
 
@@ -133,9 +134,13 @@ Team Name: Naughty Indian Crew
 
 
 <img src='https://user-images.githubusercontent.com/54531841/114287887-7ab76080-9a88-11eb-91ce-550fd8e304aa.png' align='left' width='40%'>
+
 <img src='https://user-images.githubusercontent.com/54531841/114288923-1d73dd00-9a91-11eb-954b-d296c722e815.png' align='left' width='40%'>
 
+<img src='https://user-images.githubusercontent.com/53686487/114290755-75194500-9a9f-11eb-84cd-e173b506ae1a.png' align='left' width='40%'>
+
+<img src='https://user-images.githubusercontent.com/53686487/114290739-5a46d080-9a9f-11eb-9798-c428d94fef0b.png' align='left' width='40%'>
 
 
-![image](https://user-images.githubusercontent.com/54531841/114287898-8acf4000-9a88-11eb-8f6a-593afe142206.png)
+
 
