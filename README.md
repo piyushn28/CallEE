@@ -76,7 +76,7 @@ Some key benefits:
    
    * Our platform provides features to conduct quizzes with live leaderboard.
    
-   * Every question is once attemptable and can't be retrieved back after answering once. Hence the cheating is prevented.
+   * Every question is once attemptable and can't be retrieved back after answering once. No screenshot or text copying. Hence the cheating is prevented.
    
    * Quizzes can be conducted and attempted by students in various fields like academics, job oriented, etc. 
 
