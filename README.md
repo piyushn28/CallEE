@@ -65,6 +65,10 @@
 
 3) People can be searched on the basis of the tags(fresher, sophomore, junior, senior) to lookup for mentors or to act as mentors.
 
+4) Disabled Screenshot during Quizzes to prevent sharing of answers.
+
+
+
 
 
 
