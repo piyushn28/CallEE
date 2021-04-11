@@ -17,7 +17,7 @@
 
 ## Introduction:
 
-This is an education platform that primarily focuses on connecting freshers and other students to their professors, seniors and alumini.
+This is an education platform that primarily focuses on connecting freshers and other students to their professors, seniors and alumini. A zero cheating platform for conducting quizzes.
 
 ## Demo Video Link:
 
